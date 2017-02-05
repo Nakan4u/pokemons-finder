@@ -1,3 +1,11 @@
+#custom
+android/
+__tests__/
+*config
+index.android.js
+.babelrc
+.gitattributes
+
 # OSX
 #
 .DS_Store
