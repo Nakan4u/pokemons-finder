@@ -1,6 +1,6 @@
 import styles from '../general.styles.js';
 import Badge from './Badge.js';
-import Separator from './helpers/separator.js';
+import Separator from './helpers/Separator.js';
 import React, { Component } from 'react';
 import {
     AppRegistry,
