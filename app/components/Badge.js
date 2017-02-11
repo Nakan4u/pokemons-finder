@@ -11,28 +11,22 @@ import {
 export default class Badge extends Component {
     makeBackground(type) {
         var obj = {
-            flexDirection: 'column',
-            // alignSelf: 'stretch',
-            justifyContent: 'center',
-            flex: 1,
-            height: 25,
-            marginRight: 5,
-            borderWidth: 1,
-            borderColor: 'black',
+            padding: 5,
+            margin: 5,
             borderRadius: 10
         }
         if (type === 'electric') {
-            obj.backgroundColor = 'yellow';
+            obj.backgroundColor = 'gold';
         } else if (type === 'fire') {
             obj.backgroundColor = 'orange';
+        } else if (type === 'poison') {
+            obj.backgroundColor = 'green';
         } else {
-            obj.backgroundColor = '#758BF4';
+            obj.backgroundColor = 'grey';
         }
         return obj;
     }
-    goToListByFilter() {
 
-    }
     render() {
         var setBackgroundColorByType = function (type) {
 
@@ -43,8 +37,7 @@ export default class Badge extends Component {
                 return (
                     <TouchableHighlight key={index}
                         style={this.makeBackground(item.type.name)}
-                        onPress={this.goToListByFilter(item.type.name)}
-                        underlayColor="#88D4F5">
+                        onPress={this.props.getPokemonsListByTypeHandler.bind(this, item.type)}>
                         <Text style={styles.type}> {item.type.name} </Text>
                     </TouchableHighlight>
                 )
@@ -56,14 +49,17 @@ export default class Badge extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}> {pokemon.name} </Text>
                 <Image source={{ uri: pokemon.sprites.front_default }} style={styles.image}></Image>
-                <Text style={styles.type}> Type:</Text>
-                {list}
+                <Text style={styles.info}> Click on any type to get pokemons list with same type:</Text>
+                <View style={styles.typeWrapper}>
+                    {list}
+                </View>
             </View>
         );
     }
 }
 Badge.propTypes = {
-    pokemon: React.PropTypes.object.isRequired
+    pokemon: React.PropTypes.object.isRequired,
+    getPokemonsListByTypeHandler: React.PropTypes.func.isRequired
 };
 
 AppRegistry.registerComponent('Badge', () => Badge);

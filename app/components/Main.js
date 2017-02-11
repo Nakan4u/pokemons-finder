@@ -15,7 +15,7 @@ export default class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pokemonName: '2', //pikachu
+            pokemonName: '5', //pikachu
             isLoading: false,
             error: false
         };

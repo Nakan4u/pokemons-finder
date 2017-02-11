@@ -6,19 +6,35 @@ var styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        height: 250
+        height: 200,
+        width: 200,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#48BBEC',
+        alignSelf: 'center'
     },
     title: {
         fontSize: 24,
-        color: '#111',
+        color: '#48BBEC',
         alignSelf: 'center',
         marginBottom: 15
     },
-    type: {
-        fontSize: 18,
-        color: '#111',
+    info: {
+        fontSize: 12,
+        color: '#48BBEC',
         alignSelf: 'center',
-        marginBottom: 15
+    },
+    type: {
+        fontSize: 14,
+        lineHeight: 14,
+        color: '#fff',
+        alignSelf: 'center',
+    },
+    typeWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
     }
 });
 

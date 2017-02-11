@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         height: 50,
-        padding: 4,
-        marginRight: 5,
+        padding: 10,
+        marginRight: 0,
         fontSize: 23,
         borderWidth: 1,
         borderColor: 'white',
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     button: {
-        height: 45,
+        height: 50,
         flexDirection: 'row',
         backgroundColor: 'white',
         borderColor: 'white',

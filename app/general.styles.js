@@ -7,8 +7,8 @@ var styles = StyleSheet.create({
         flex: 1
     },
     title: {
-        fontSize: 18,
-        color: '#111',
+        fontSize: 24,
+        color: '#48BBEC',
         alignSelf: 'center',
         marginBottom: 15
     },
@@ -18,27 +18,16 @@ var styles = StyleSheet.create({
         alignSelf: 'center'
     },
     button: {
-        height: 25,
+        height: 50,
         flexDirection: 'row',
         backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
+        borderColor: 'white',
         borderWidth: 1,
         borderRadius: 8,
         marginBottom: 10,
         marginTop: 10,
         alignSelf: 'stretch',
         justifyContent: 'center'
-    },
-    rowContainer: {
-        padding: 10,
-        paddingLeft: 15
-    },
-    rowTitle: {
-        color: '#48BBEC',
-        fontSize: 16
-    },
-    rowContent: {
-        fontSize: 19
     }
 });
 

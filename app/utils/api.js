@@ -1,9 +1,13 @@
-const firebaseUrl = 'https://pokemons-picker.firebaseio.com/favorite_pokemons.json';
+const firebaseUrl = 'https://pokemons-picker.firebaseio.com/favorite_pokemons.json',
+    apiBaseUrl = 'https://pokeapi.co/api/v2';
 
 var api = {
     getInfo(pokemonName) {
         pokemonName = pokemonName.toLowerCase().trim();
-        var url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+        var url = `${apiBaseUrl}/pokemon/${pokemonName}`;
+        return fetch(url).then((res) => res.json())
+    },
+    getListBytype(url) {
         return fetch(url).then((res) => res.json())
     },
     getFavoritePokemons() {
