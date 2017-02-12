@@ -28,9 +28,6 @@ export default class Badge extends Component {
     }
 
     render() {
-        var setBackgroundColorByType = function (type) {
-
-        }
         var pokemon = this.props.pokemon;
         var list = pokemon.types.map((item, index) => {
             if (item.type.name) {

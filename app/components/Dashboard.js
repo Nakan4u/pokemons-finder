@@ -23,6 +23,8 @@ export default class Dashboard extends Component {
             isLoading: false,
             error: false
         };
+    }
+    componentDidMount() {
         this.checkIfPokemonInFavorites();
     }
 
@@ -58,7 +60,18 @@ export default class Dashboard extends Component {
                     this.setState({ isLoading: false, error: 'err' });
                 })
         } else return;
-    };
+    }
+
+    toogleFavorites() {
+        if (this.state.isLoading) {
+            return;
+        }
+        if (this.state.isFavorite) {
+            this.removeFromFavorites();
+        } else {
+            this.addToFavorites();
+        }
+    }
 
     goToProfile() {
         // this.props.navigator.push({
@@ -169,8 +182,9 @@ export default class Dashboard extends Component {
                 </TouchableHighlight>*/}
                 <TouchableHighlight
                     style={styles.button}
-                    onPress={this.state.isFavorite ? this.removeFromFavorites.bind(this) : this.addToFavorites.bind(this)}
-                    underlayColor="green">
+                    onPress={this.toogleFavorites.bind(this)}
+                    activeOpacity={this.state.isLoading ? 0.5 : 1}
+                    underlayColor="blue">
                     <Text style={styles.buttonText}> {this.state.isFavorite ? 'Remove from favorites' : 'Add to favorites'} </Text>
                 </TouchableHighlight>
                 <TouchableHighlight

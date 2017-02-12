@@ -8,6 +8,7 @@ import {
     Text,
     TextInput,
     TouchableHighlight,
+    TouchableOpacity,
     View
 } from 'react-native';
 
@@ -22,45 +23,50 @@ export default class MainPage extends Component {
     }
     handleChange(event) {
         this.setState({
-            pokemonName: event.nativeEvent.text
+            pokemonName: event.nativeEvent.text,
+            error: false
         })
     }
     handleSubmit() {
         // update our indicatorIOS spinner
-        this.setState({
-            isLoading: true
-        });
-        console.log('SUMBIT', this.state.pokemonName);
-        // fetch data from pokemon api
-        API.getInfo(this.state.pokemonName)
-            .then((res) => {
-                if (res.detail === "Not found.") {
-                    this.setState({
-                        error: 'Pokemon not found',
-                        isLoading: false
-                    })
-                } else {
-                    console.log(res);
-                    this.props.navigator.push({
-                        title: res.name || "Pokemon name",
-                        component: Dashboard,
-                        passProps: { pokemon: res }
-                    });
-                    this.setState({
-                        isLoading: false,
-                        error: false,
-                        pokemonName: ''
-                    })
-                }
-            })
-            .catch((error) => { console.error(error) });
-        // rerout to the next passing that pokemon information
+        if (this.state.pokemonName) {
+            this.setState({
+                isLoading: true
+            });
+            console.log('SUMBIT', this.state.pokemonName);
+            // fetch data from pokemon api
+            API.getInfo(this.state.pokemonName)
+                .then((res) => {
+                    if (res.detail === "Not found.") {
+                        this.setState({
+                            error: 'Pokemon not found',
+                            isLoading: false
+                        })
+                    } else {
+                        console.log(res);
+                        this.props.navigator.push({
+                            title: res.name || "Pokemon name",
+                            component: Dashboard,
+                            passProps: { pokemon: res }
+                        });
+                        this.setState({
+                            isLoading: false,
+                            error: false,
+                            pokemonName: ''
+                        })
+                    }
+                })
+                .catch((error) => { console.error(error) });
+        } else {
+            this.setState({error: 'search field shouldn\'t be empty'});
+        }
     }
 
     render() {
         var showErr = (
             this.state.error ? <Text style={styles.error}> {this.state.error} </Text> : <View></View>
-        );
+        ),
+            disabled = !this.state.pokemonName;
         return (
             <View style={styles.mainContainer}>
                 <Text style={styles.title}>
@@ -76,6 +82,7 @@ export default class MainPage extends Component {
                 <TouchableHighlight
                     style={styles.button}
                     onPress={this.handleSubmit.bind(this)}
+                    activeOpacity={disabled ? 0.5 : 1}
                     underlayColor="white">
                     <Text style={styles.buttonText}> SEARCH </Text>
                 </TouchableHighlight>
