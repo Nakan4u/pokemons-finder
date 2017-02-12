@@ -49,7 +49,7 @@ export default class Badge extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}> {pokemon.name} </Text>
                 <Image source={{ uri: pokemon.sprites.front_default }} style={styles.image}></Image>
-                <Text style={styles.info}> Click on any type to get pokemons list with same type:</Text>
+                <Text style={styles.info}> Click on type to get pokemons with same type:</Text>
                 <View style={styles.typeWrapper}>
                     {list}
                 </View>

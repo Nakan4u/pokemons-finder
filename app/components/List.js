@@ -24,9 +24,7 @@ export default class List extends Component {
         };
     }
     goToProfile(pokemonName) {
-        this.setState({
-            isLoading: true
-        });
+        this.setState({isLoading: true});
         API.getInfo(pokemonName)
             .then((res) => {
                 if (res.detail === "Not found.") {
@@ -39,7 +37,7 @@ export default class List extends Component {
                     this.props.navigator.push({
                         title: res.name || "Pokemon name",
                         component: Dashboard,
-                        passProps: { pokemon: res }
+                        passProps: { pokemon: res, isFavorite: this.props.title === 'Favorites list' }
                     });
                     this.setState({
                         isLoading: false,
@@ -54,9 +52,10 @@ export default class List extends Component {
         var showErr = (
             this.state.error ? <Text style={styles.error}> {this.state.error} </Text> : <View></View>
         );
+        var title = this.props.title;
         return (
             <View style={styles.container}>
-                <Text style={styles.title}> Favorites list: </Text>
+                <Text style={styles.title}> {title} </Text>
                 <ActivityIndicator
                     animating={this.state.isLoading}
                     color="#111"
@@ -120,6 +119,7 @@ var styles = StyleSheet.create({
 });
 
 List.propTypes = {
+    title: React.PropTypes.string.isRequired,
     pokemonList: React.PropTypes.array.isRequired
 };
 

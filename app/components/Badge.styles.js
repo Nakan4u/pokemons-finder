@@ -23,6 +23,7 @@ var styles = StyleSheet.create({
         fontSize: 12,
         color: '#48BBEC',
         alignSelf: 'center',
+        margin: 10
     },
     type: {
         fontSize: 14,

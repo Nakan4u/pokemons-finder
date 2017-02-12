@@ -18,27 +18,48 @@ export default class Dashboard extends Component {
         super(props);
         this.state = {
             pokemon: this.props.pokemon,
+            isFavorite: this.props.isFavorite || false,
+            storageId: undefined,
             isLoading: false,
             error: false
         };
+        this.checkIfPokemonInFavorites();
     }
-    // solve problem with context on Api promises;
-    addToFavorites(context) {
+
+    addToFavorites() {
         var sendData = {
             name: this.state.pokemon.name,
             id: this.state.pokemon.id
         }
-        this.setState({isLoading: true});
+        this.setState({ isLoading: true });
         API.addFavoritePokeon(sendData)
             .then((res) => {
                 console.log('sucess', res);
-                this.setState({isLoading: false});
+                this.setState({ isLoading: false, isFavorite: true });
             })
             .catch((err) => {
                 console.log('error');
-                this.setState({isLoading: false, error: 'problem whith adding to favorites'});
+                this.setState({ isLoading: false, error: 'problem whith adding to favorites' });
             })
     }
+
+    removeFromFavorites() {
+        var storageId = this.state.storageId;
+
+        if (storageId) {
+            this.setState({ isLoading: true });
+            API.removeFavoritePokeon(storageId)
+                .then((res) => {
+                    console.log('sucess', res);
+                    this.setState({ isLoading: false, isFavorite: false });
+                })
+                .catch((err) => {
+                    console.log('error');
+                    this.setState({ isLoading: false, error: 'err' });
+                })
+        } else return;
+    };
+
     goToProfile() {
         // this.props.navigator.push({
         //     title: "Profile",
@@ -51,37 +72,62 @@ export default class Dashboard extends Component {
         var result = [];
         if (typeof data === 'object') {
             for (var prop in data) {
-                result.push({pokemon: data[prop]});
+                result.push({ pokemon: data[prop] });
             }
             return result;
         } else return;
     }
-    // solve problem with context on Api promises;
-    goToFavorites(context) {
-        var that = this,
-            convertedData;
 
-        this.setState({isLoading: true});
+    goToFavorites() {
+        var convertedData;
+
+        this.setState({ isLoading: true });
 
         API.getFavoritePokemons()
             .then((res) => {
                 console.log('favorites', res);
                 convertedData = this._convertData(res); // conver data to be the same as pokemon API list response;
-                this.setState({isLoading: false});
-                that.props.navigator.push({
+                this.setState({ isLoading: false });
+                this.props.navigator.push({
                     title: "Favorites list",
                     component: List,
-                    passProps: { pokemonList: convertedData }
+                    passProps: { title: "Favorites list", pokemonList: convertedData }
                 });
             })
             .catch((err) => {
                 console.error(err);
-                this.setState({isLoading: false, error: 'error with getting favorites pokemos API'});
+                this.setState({ isLoading: false, error: 'error with getting favorites pokemos API' });
             })
     }
 
-    getPokemonsListByType(type){
-        this.setState({isLoading: true});
+    checkIfPokemonInFavorites() {
+        var pokemonName = this.state.pokemon.name;
+
+        if (this.state.isFavorite) {
+            return;
+        } else {
+            this.setState({ isLoading: true });
+            API.getFavoritePokemons()
+                .then((res) => {
+                    console.log('favorites', res);
+                    // check if pokemon already mentioned in favorites list obj
+                    for (var prop in res) {
+                        if (pokemonName === res[prop].name) {
+                            this.setState({ isLoading: false, isFavorite: true, storageId: prop });
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .catch((err) => {
+                    console.error(err);
+                    this.setState({ isLoading: false });
+                })
+        }
+    }
+
+    getPokemonsListByType(type) {
+        this.setState({ isLoading: true });
         // fetch data from pokemon api
         API.getListBytype(type.url)
             .then((res) => {
@@ -91,11 +137,11 @@ export default class Dashboard extends Component {
                         isLoading: false
                     })
                 } else {
-                    console.log("pokemons list by type ",res);
+                    console.log("pokemons list by type ", res);
                     this.props.navigator.push({
                         title: type.name || "",
                         component: List,
-                        passProps: { pokemonList: res.pokemon }
+                        passProps: { title: type.name + " pokemons list", pokemonList: res.pokemon }
                     });
                     this.setState({
                         isLoading: false,
@@ -106,6 +152,7 @@ export default class Dashboard extends Component {
             })
             .catch((error) => { console.error(error) });
     }
+
     render() {
         return (
             <View style={styles.container}>
@@ -114,17 +161,17 @@ export default class Dashboard extends Component {
                     animating={this.state.isLoading}
                     color="#111"
                     size="large"></ActivityIndicator>
-                <TouchableHighlight
+                {/*<TouchableHighlight
                     style={styles.button}
                     onPress={this.goToProfile.bind(this)}
                     underlayColor="orange">
                     <Text style={styles.buttonText}> Get pokemon profile </Text>
-                </TouchableHighlight>
+                </TouchableHighlight>*/}
                 <TouchableHighlight
                     style={styles.button}
-                    onPress={this.addToFavorites.bind(this)}
+                    onPress={this.state.isFavorite ? this.removeFromFavorites.bind(this) : this.addToFavorites.bind(this)}
                     underlayColor="green">
-                    <Text style={styles.buttonText}> Add to favorites </Text>
+                    <Text style={styles.buttonText}> {this.state.isFavorite ? 'Remove from favorites' : 'Add to favorites'} </Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                     style={styles.button}

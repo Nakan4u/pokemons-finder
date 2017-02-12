@@ -56,6 +56,7 @@ export default class MainPage extends Component {
             .catch((error) => { console.error(error) });
         // rerout to the next passing that pokemon information
     }
+
     render() {
         var showErr = (
             this.state.error ? <Text style={styles.error}> {this.state.error} </Text> : <View></View>

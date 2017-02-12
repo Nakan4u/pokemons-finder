@@ -18,6 +18,11 @@ var api = {
             method: 'post',
             body: JSON.stringify(data)
         }).then((res) => res.json());
+    },
+    removeFavoritePokeon(id) {
+        return fetch(`https://pokemons-picker.firebaseio.com/favorite_pokemons/${id}.json`, {
+            method: 'delete'
+        }).then((res) => res.json());
     }
 };
 
