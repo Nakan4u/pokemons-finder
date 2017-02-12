@@ -24,20 +24,19 @@ export default class Dashboard extends Component {
     }
     // solve problem with context on Api promises;
     addToFavorites(context) {
-        var that = this;
         var sendData = {
             name: this.state.pokemon.name,
             id: this.state.pokemon.id
         }
-        this.setState = {isLoading: true};
+        this.setState({isLoading: true});
         API.addFavoritePokeon(sendData)
             .then((res) => {
                 console.log('sucess', res);
-                // that.setState({isLoading: false});
+                this.setState({isLoading: false});
             })
             .catch((err) => {
                 console.log('error');
-                // that.setState({isLoading: false, error: 'problem whith adding to favorites'});
+                this.setState({isLoading: false, error: 'problem whith adding to favorites'});
             })
     }
     goToProfile() {
@@ -61,15 +60,14 @@ export default class Dashboard extends Component {
     goToFavorites(context) {
         var that = this,
             convertedData;
-        this.setState = {isLoading: true};
+
+        this.setState({isLoading: true});
 
         API.getFavoritePokemons()
             .then((res) => {
                 console.log('favorites', res);
                 convertedData = this._convertData(res); // conver data to be the same as pokemon API list response;
-                // that.setState({
-                //     isLoading: false
-                // })
+                this.setState({isLoading: false});
                 that.props.navigator.push({
                     title: "Favorites list",
                     component: List,
@@ -78,14 +76,12 @@ export default class Dashboard extends Component {
             })
             .catch((err) => {
                 console.error(err);
-                // that.setState({isLoading: false, error: 'err with getting favorites pokemos API'})
+                this.setState({isLoading: false, error: 'error with getting favorites pokemos API'});
             })
     }
 
     getPokemonsListByType(type){
-        this.setState({
-            isLoading: true
-        });
+        this.setState({isLoading: true});
         // fetch data from pokemon api
         API.getListBytype(type.url)
             .then((res) => {
