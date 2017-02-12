@@ -116,27 +116,24 @@ export default class Dashboard extends Component {
     checkIfPokemonInFavorites() {
         var pokemonName = this.state.pokemon.name;
 
-        if (this.state.isFavorite) {
-            return;
-        } else {
-            this.setState({ isLoading: true });
-            API.getFavoritePokemons()
-                .then((res) => {
-                    console.log('favorites', res);
-                    // check if pokemon already mentioned in favorites list obj
-                    for (var prop in res) {
-                        if (pokemonName === res[prop].name) {
-                            this.setState({ isLoading: false, isFavorite: true, storageId: prop });
-                            return true;
-                        }
+        this.setState({ isLoading: true });
+        API.getFavoritePokemons()
+            .then((res) => {
+                console.log('favorites', res);
+                // check if pokemon already mentioned in favorites list obj
+                for (var prop in res) {
+                    if (pokemonName === res[prop].name) {
+                        this.setState({ isLoading: false, isFavorite: true, storageId: prop });
+                        return true;
                     }
-                    return false;
-                })
-                .catch((err) => {
-                    console.error(err);
-                    this.setState({ isLoading: false });
-                })
-        }
+                }
+                this.setState({ isLoading: false });
+                return false;
+            })
+            .catch((err) => {
+                console.error(err);
+                this.setState({ isLoading: false });
+            })
     }
 
     getPokemonsListByType(type) {
@@ -144,10 +141,10 @@ export default class Dashboard extends Component {
         // fetch data from pokemon api
         API.getListBytype(type.url)
             .then((res) => {
+                this.setState({ isLoading: false });
                 if (res.detail === "Not found.") {
                     this.setState({
-                        error: 'Pokemons not found',
-                        isLoading: false
+                        error: 'Pokemons not found'
                     })
                 } else {
                     console.log("pokemons list by type ", res);
@@ -157,7 +154,6 @@ export default class Dashboard extends Component {
                         passProps: { title: type.name + " pokemons list", pokemonList: res.pokemon }
                     });
                     this.setState({
-                        isLoading: false,
                         error: false,
                         pokemonName: ''
                     })
