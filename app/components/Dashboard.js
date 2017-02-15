@@ -1,6 +1,5 @@
 import API from '../utils/api.js';
 import styles from '../general.styles.js';
-import Profile from './Profile.js';
 import Badge from './Badge.js';
 import List from './List.js';
 import React, { Component } from 'react';

@@ -1,8 +1,8 @@
-import styles from './Badge.styles.js';
 import React, { Component } from 'react';
 import {
     AppRegistry,
     Text,
+    StyleSheet,
     Image,
     TouchableHighlight,
     View
@@ -54,6 +54,46 @@ export default class Badge extends Component {
         );
     }
 }
+
+var styles = StyleSheet.create({
+    container: {
+        marginTop: 15,
+        flex: 1
+    },
+    image: {
+        height: 200,
+        width: 200,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#48BBEC',
+        alignSelf: 'center'
+    },
+    title: {
+        fontSize: 24,
+        color: '#48BBEC',
+        alignSelf: 'center',
+        marginBottom: 15
+    },
+    info: {
+        fontSize: 12,
+        color: '#48BBEC',
+        alignSelf: 'center',
+        margin: 10
+    },
+    type: {
+        fontSize: 14,
+        lineHeight: 14,
+        color: '#fff',
+        alignSelf: 'center',
+    },
+    typeWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    }
+});
+
 Badge.propTypes = {
     pokemon: React.PropTypes.object.isRequired,
     getPokemonsListByTypeHandler: React.PropTypes.func.isRequired
