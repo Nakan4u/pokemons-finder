@@ -7,6 +7,10 @@ var api = {
         var url = `${apiBaseUrl}/pokemon/${pokemonName}`;
         return fetch(url).then((res) => res.json())
     },
+    getList() {
+        var url = `${apiBaseUrl}/pokemon?limit=10`;
+        return fetch(url).then((res) => res.json())
+    },
     getListBytype(url) {
         return fetch(url).then((res) => res.json())
     },

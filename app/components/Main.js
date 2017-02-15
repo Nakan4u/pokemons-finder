@@ -1,16 +1,71 @@
 import API from '../utils/api.js';
 import Dashboard from './Dashboard.js';
-import styles from './Main.styles.js';
+import List from './List.js';
 import React, { Component } from 'react';
 import {
     AppRegistry,
     ActivityIndicator,
     Text,
+    StyleSheet,
     TextInput,
     TouchableHighlight,
     TouchableOpacity,
     View
 } from 'react-native';
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        padding: 30,
+        marginTop: 25,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#48BBEC'
+    },
+    title: {
+        marginBottom: 20,
+        fontSize: 25,
+        textAlign: 'center',
+        color: '#fff'
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#fff',
+        marginBottom: 5,
+    },
+    searchInput: {
+        height: 50,
+        padding: 10,
+        marginRight: 0,
+        fontSize: 23,
+        borderWidth: 1,
+        borderColor: 'white',
+        borderRadius: 8,
+        color: 'white'
+    },
+    buttonText: {
+        fontSize: 18,
+        color: '#111',
+        alignSelf: 'center'
+    },
+    button: {
+        height: 50,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        borderColor: 'white',
+        borderWidth: 1,
+        borderRadius: 8,
+        marginBottom: 10,
+        marginTop: 10,
+        alignSelf: 'stretch',
+        justifyContent: 'center'
+    },
+    error: {
+        fontSize: 18,
+        color: 'red',
+        textAlign: 'center'
+    }
+});
 
 export default class MainPage extends Component {
     constructor(props) {
@@ -58,8 +113,24 @@ export default class MainPage extends Component {
                 })
                 .catch((error) => { console.error(error) });
         } else {
-            this.setState({error: 'search field shouldn\'t be empty'});
+            this.setState({ error: 'search field shouldn\'t be empty' });
         }
+    }
+    getList() {
+        API.getList()
+            .then((res) => {
+                console.log(res);
+                this.props.navigator.push({
+                    title: "Pokemons list",
+                    component: List,
+                    passProps: { title: "Pokemons list", pokemonList: res.results }
+                });
+                this.setState({
+                    isLoading: false,
+                    error: false
+                })
+            })
+            .catch((error) => { console.error(error) });
     }
 
     render() {
@@ -84,7 +155,13 @@ export default class MainPage extends Component {
                     onPress={this.handleSubmit.bind(this)}
                     activeOpacity={disabled ? 0.5 : 1}
                     underlayColor="white">
-                    <Text style={styles.buttonText}> SEARCH </Text>
+                    <Text style={styles.buttonText}> Search </Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={this.getList.bind(this)}
+                    underlayColor="white">
+                    <Text style={styles.buttonText}> Get pokemon list </Text>
                 </TouchableHighlight>
                 <ActivityIndicator
                     animating={this.state.isLoading}
