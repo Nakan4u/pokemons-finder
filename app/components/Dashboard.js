@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
     ActivityIndicator,
+    AlertIOS,
     Text,
     Image,
     TouchableHighlight,
@@ -36,7 +37,8 @@ export default class Dashboard extends Component {
         this.setState({ isLoading: true });
         API.addFavoritePokeon(sendData)
             .then((res) => {
-                console.log('sucess', res);
+                console.log('Pokemon added ', res);
+                AlertIOS.alert( 'sucess', 'Pokemon added to your favorites list' );
                 this.setState({ isLoading: false, isFavorite: true });
             })
             .catch((err) => {
@@ -52,7 +54,8 @@ export default class Dashboard extends Component {
             this.setState({ isLoading: true });
             API.removeFavoritePokeon(storageId)
                 .then((res) => {
-                    console.log('sucess', res);
+                    console.log('Pokemon removed ', res);
+                    AlertIOS.alert( 'sucess', 'Pokemon removed from your favorites list' );
                     this.setState({ isLoading: false, isFavorite: false });
                 })
                 .catch((err) => {
