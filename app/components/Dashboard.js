@@ -38,7 +38,7 @@ export default class Dashboard extends Component {
         API.addFavoritePokeon(sendData)
             .then((res) => {
                 console.log('Pokemon added ', res);
-                AlertIOS.alert( 'sucess', 'Pokemon added to your favorites list' );
+                AlertIOS.alert( 'Success', 'Pokemon added to your favorites list' );
                 this.setState({ isLoading: false, isFavorite: true });
             })
             .catch((err) => {
@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
             API.removeFavoritePokeon(storageId)
                 .then((res) => {
                     console.log('Pokemon removed ', res);
-                    AlertIOS.alert( 'sucess', 'Pokemon removed from your favorites list' );
+                    AlertIOS.alert( 'Success', 'Pokemon removed from your favorites list' );
                     this.setState({ isLoading: false, isFavorite: false });
                 })
                 .catch((err) => {
@@ -74,14 +74,6 @@ export default class Dashboard extends Component {
         } else {
             this.addToFavorites();
         }
-    }
-
-    goToProfile() {
-        // this.props.navigator.push({
-        //     title: "Profile",
-        //     component: Profile,
-        //     passProps: { pokemon: this.state.pokemon }
-        // });
     }
 
     _convertData(data) {
@@ -173,12 +165,6 @@ export default class Dashboard extends Component {
                     animating={this.state.isLoading}
                     color="#111"
                     size="large"></ActivityIndicator>
-                {/*<TouchableHighlight
-                    style={styles.button}
-                    onPress={this.goToProfile.bind(this)}
-                    underlayColor="orange">
-                    <Text style={styles.buttonText}> Get pokemon profile </Text>
-                </TouchableHighlight>*/}
                 <TouchableHighlight
                     style={styles.button}
                     onPress={this.toogleFavorites.bind(this)}
