@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         height: 50,
         padding: 10,
         marginRight: 0,
+        marginBottom: 15,
         fontSize: 23,
         borderWidth: 1,
         borderColor: 'white',
@@ -55,8 +56,7 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderWidth: 1,
         borderRadius: 8,
-        marginBottom: 10,
-        marginTop: 10,
+        marginBottom: 15,
         alignSelf: 'stretch',
         justifyContent: 'center'
     },

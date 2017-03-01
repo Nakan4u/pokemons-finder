@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        height: 200,
-        width: 200,
+        height: 100,
+        width: 100,
         borderWidth: 1,
         borderRadius: 10,
         borderColor: '#48BBEC',
@@ -54,14 +54,69 @@ export default class Badge extends Component {
             margin: 5,
             borderRadius: 10
         }
-        if (type === 'electric') {
-            obj.backgroundColor = 'gold';
-        } else if (type === 'fire') {
-            obj.backgroundColor = 'orange';
-        } else if (type === 'poison') {
-            obj.backgroundColor = 'green';
-        } else {
-            obj.backgroundColor = 'grey';
+        switch (type) {
+            case 'normal':
+                obj.backgroundColor = 'aliceblue';
+                break;
+            case 'fighting':
+                obj.backgroundColor = 'bisque';
+                break;
+            case 'flying':
+                obj.backgroundColor = 'brown';
+                break;
+            case 'poison':
+                obj.backgroundColor = 'chartreuse';
+                break;
+            case 'ground':
+                obj.backgroundColor = 'darkgoldenrod';
+                break;
+            case 'rock':
+                obj.backgroundColor = 'darkgrey';
+                break;
+            case 'bug':
+                obj.backgroundColor = 'darkmagenta';
+                break;
+            case 'ghost':
+                obj.backgroundColor = 'darkseagreen';
+                break;
+            case 'steel':
+                obj.backgroundColor = 'dimgray';
+                break;
+            case 'fire':
+                obj.backgroundColor = 'gold';
+                break;
+            case 'water':
+                obj.backgroundColor = 'deepskyblue';
+                break;
+            case 'grass':
+                obj.backgroundColor = 'forestgreen';
+                break;
+            case 'electric':
+                obj.backgroundColor = 'khaki';
+                break;
+            case 'psychic':
+                obj.backgroundColor = 'lavender';
+                break;
+            case 'ice':
+                obj.backgroundColor = 'lightblue';
+                break;
+            case 'dragon':
+                obj.backgroundColor = 'lightgreen';
+                break;
+            case 'dark':
+                obj.backgroundColor = 'indigo';
+                break;
+            case 'fairy':
+                obj.backgroundColor = 'lightpink';
+                break;
+            case 'unknown':
+                obj.backgroundColor = 'silver';
+                break;
+            case 'shadow':
+                obj.backgroundColor = 'black';
+                break;
+            default:
+                obj.backgroundColor = 'grey';
         }
         return obj;
     }
@@ -85,7 +140,7 @@ export default class Badge extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}> {pokemon.name} </Text>
                 <Image source={{ uri: pokemon.sprites.front_default }} style={styles.image}></Image>
-                <Text style={styles.info}> Click on type to get pokemons with same type:</Text>
+                <Text style={styles.info}> Type to get pokemons list with same type:</Text>
                 <View style={styles.typeWrapper}>
                     {list}
                 </View>
