@@ -2,10 +2,10 @@ import API from '../utils/api.js';
 import styles from '../general.styles.js';
 import Badge from './Badge.js';
 import List from './List.js';
+import Spinner from 'react-native-loading-spinner-overlay';
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    ActivityIndicator,
     AlertIOS,
     Text,
     Image,
@@ -37,8 +37,8 @@ export default class Dashboard extends Component {
         API.addFavoritePokeon(sendData)
             .then((res) => {
                 console.log('Pokemon added ', res);
-                AlertIOS.alert( 'Success', 'Pokemon added to your favorites list' );
                 this.setState({ isLoading: false, isFavorite: true });
+                this.showNotification('Pokemon added to your favorites list');
             })
             .catch((err) => {
                 console.log('error');
@@ -54,14 +54,18 @@ export default class Dashboard extends Component {
             API.removeFavoritePokeon(storageId)
                 .then((res) => {
                     console.log('Pokemon removed ', res);
-                    AlertIOS.alert( 'Success', 'Pokemon removed from your favorites list' );
                     this.setState({ isLoading: false, isFavorite: false });
+                    this.showNotification('Pokemon removed from your favorites list');
                 })
                 .catch((err) => {
                     console.log('error');
                     this.setState({ isLoading: false, error: 'err' });
                 })
         } else return;
+    }
+    
+    showNotification(msg, type = 'Success') {
+        console.log( type, msg );
     }
 
     toogleFavorites() {
@@ -159,11 +163,7 @@ export default class Dashboard extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Badge pokemon={this.state.pokemon} getPokemonsListByTypeHandler={this.getPokemonsListByType.bind(this)}></Badge>
-                <ActivityIndicator
-                    animating={this.state.isLoading}
-                    color="#111"
-                    size="large"></ActivityIndicator>
+                <Badge pokemon={this.state.pokemon} getPokemonsListByTypeHandler={this.getPokemonsListByType.bind(this)}></Badge>                
                 <TouchableHighlight
                     style={styles.button}
                     onPress={this.toogleFavorites.bind(this)}
@@ -177,6 +177,7 @@ export default class Dashboard extends Component {
                     underlayColor="blue">
                     <Text style={styles.buttonText}> Go to favorites </Text>
                 </TouchableHighlight>
+                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
             </View>
         );
     }

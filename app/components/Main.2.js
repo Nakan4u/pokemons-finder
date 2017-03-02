@@ -3,10 +3,10 @@
 import API from '../utils/api.js';
 import Dashboard from './Dashboard.js';
 import List from './List.js';
+import Spinner from 'react-native-loading-spinner-overlay';
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    ActivityIndicator,
     Text,
     StyleSheet,
     TextInput,
@@ -153,10 +153,7 @@ export default class MainPage extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> Demo </Text>
                 </TouchableHighlight>
-                <ActivityIndicator
-                    animating={this.state.isLoading}
-                    color="#111"
-                    size="large"></ActivityIndicator>
+                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
                 {showErr}
             </View>
         );

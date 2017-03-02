@@ -1,10 +1,10 @@
 import Dashboard from './Dashboard.js';
 import Separator from './helpers/Separator.js';
 import API from '../utils/api.js';
+import Spinner from 'react-native-loading-spinner-overlay';
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    ActivityIndicator,
     Text,
     View,
     ScrollView,
@@ -95,10 +95,6 @@ export default class List extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}> {title} </Text>
-                <ActivityIndicator
-                    animating={this.state.isLoading}
-                    color="#111"
-                    size="large"></ActivityIndicator>
                 {showErr}
                 <ListView
                     dataSource={this.state.dataSource}
@@ -115,6 +111,7 @@ export default class List extends Component {
                             <Separator></Separator>
                         </View>
                     }} />
+                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
             </View>
         );
     }
