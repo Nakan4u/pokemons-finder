@@ -3,6 +3,7 @@ import styles from '../general.styles.js';
 import Badge from './Badge.js';
 import List from './List.js';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Toast from 'react-native-simple-toast';
 import React, { Component } from 'react';
 import {
     AppRegistry,
@@ -66,6 +67,7 @@ export default class Dashboard extends Component {
     
     showNotification(msg, type = 'Success') {
         console.log( type, msg );
+        Toast.show(msg);
     }
 
     toogleFavorites() {
