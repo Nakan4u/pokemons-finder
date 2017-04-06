@@ -1,5 +1,11 @@
 import Main from './app/components/Main';
 import React, { Component } from 'react';
+import { createStore } from 'redux';
+import pokeApp from './app/reducers'
+
+const store = createStore(
+  pokeApp
+);
 
 import {
   AppRegistry,
@@ -11,9 +17,11 @@ import {
 
 class TestApp extends React.Component {
   render() {
+    console.log(store.getState());
     return (
       <NavigatorIOS
         style={styles.container}
+        store={store}
         initialRoute={{
           title: 'Pokemons finder',
           component: Main
