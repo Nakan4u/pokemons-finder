@@ -1,4 +1,4 @@
-const currentPokemon = (state = 'pikachu2', action) => {
+const currentPokemon = (state = 'pikachu', action) => {
   switch (action.type) {
     case 'SET_CURRENT_POKEMON':
       return action.pokemon

@@ -2,6 +2,8 @@ import API from '../utils/api.js';
 import Dashboard from './Dashboard.js';
 import List from './List.js';
 import React, { Component } from 'react';
+import { createStore } from 'redux';
+import pokeApp from '../reducers';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {
     AppRegistry,
@@ -12,6 +14,11 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+
+
+const store = createStore(
+    pokeApp
+);
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -71,7 +78,7 @@ export default class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pokemonName: '5', //pikachu
+            pokemonName: store.getState().currentPokemon,
             isLoading: false,
             error: false
         };
@@ -81,14 +88,19 @@ export default class MainPage extends Component {
             pokemonName: event.nativeEvent.text,
             error: false
         })
+
     }
     handleSubmit() {
         // update our indicatorIOS spinner
         if (this.state.pokemonName) {
+            store.dispatch({
+                type: 'SET_CURRENT_POKEMON',
+                pokemon: this.state.pokemonName
+            });
             this.setState({
                 isLoading: true
             });
-            console.log('SUMBIT', this.state.pokemonName);
+            console.log('submit action, redux store:', store.getState());
             // fetch data from pokemon api
             API.getInfo(this.state.pokemonName)
                 .then((res) => {
@@ -166,7 +178,7 @@ export default class MainPage extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> Get pokemon list </Text>
                 </TouchableHighlight>
-                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                 {showErr}
             </View>
         );
