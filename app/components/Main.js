@@ -2,8 +2,7 @@ import API from '../utils/api.js';
 import Dashboard from './Dashboard.js';
 import List from './List.js';
 import React, { Component } from 'react';
-import { createStore } from 'redux';
-import pokeApp from '../reducers';
+import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {
     AppRegistry,
@@ -15,10 +14,6 @@ import {
     View
 } from 'react-native';
 
-
-const store = createStore(
-    pokeApp
-);
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -74,35 +69,31 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class MainPage extends Component {
+class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pokemonName: store.getState().currentPokemon,
-            isLoading: false,
+            pokemonName: this.props.currentPokemonName,
+            isLoading: this.props.appLoadingState,
             error: false
         };
+        console.log('this props: ', this.props);
     }
+
     handleChange(event) {
         this.setState({
             pokemonName: event.nativeEvent.text,
             error: false
         })
-
     }
     handleSubmit() {
         // update our indicatorIOS spinner
         if (this.state.pokemonName) {
-            store.dispatch({
-                type: 'SET_CURRENT_POKEMON',
-                pokemon: this.state.pokemonName
-            });
-            this.setState({
-                isLoading: true
-            });
-            console.log('submit action, redux store:', store.getState());
+            this.props.setAppLoadingState(true);
+            this.props.setCurrentPokemonName(this.state.pokemonName);
+
             // fetch data from pokemon api
-            API.getInfo(this.state.pokemonName)
+            this.props.getPokemon(this.state.pokemonName)
                 .then((res) => {
                     if (res.detail === "Not found.") {
                         this.setState({
@@ -110,7 +101,6 @@ export default class MainPage extends Component {
                             isLoading: false
                         })
                     } else {
-                        console.log(res);
                         this.props.navigator.push({
                             title: res.name || "Pokemon name",
                             component: Dashboard,
@@ -123,7 +113,6 @@ export default class MainPage extends Component {
                         })
                     }
                 })
-                .catch((error) => { console.error(error) });
         } else {
             this.setState({ error: 'search field shouldn\'t be empty' });
         }
@@ -178,11 +167,20 @@ export default class MainPage extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> Get pokemon list </Text>
                 </TouchableHighlight>
-                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
+                {/*<Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />*/}
                 {showErr}
             </View>
         );
     }
 }
+
+function mapStateToProps(state) {
+  return {
+    currentPokemonName: state.currentPokemonName,
+    appLoadingState: state.appLoadingState
+  }
+}
+
+export default connect(mapStateToProps)(MainPage);
 
 AppRegistry.registerComponent('MainPage', () => MainPage);

@@ -1,33 +1,31 @@
-import Main from './app/components/Main';
+import AppContainer from './app/containers/AppContainer';
 import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+import reducer from './app/reducers'
 
+// middleware that logs actions
+const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  NavigatorIOS,
-  View
-} from 'react-native';
-
-class TestApp extends React.Component {
-  render() {
-    return (
-      <NavigatorIOS
-        style={styles.container}
-        initialRoute={{
-          title: 'Pokemons finder',
-          component: Main
-        }} />
-    );
-  }
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+      loggerMiddleware,
+    ),
+  );
+  return createStore(reducer, initialState, enhancer);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-  }
-});
+const store = configureStore({});
 
-AppRegistry.registerComponent('TestApp', () => TestApp);
+const App = () => (
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>
+)
+
+AppRegistry.registerComponent('TestApp', () => App);

@@ -1,5 +1,7 @@
+import * as currentPokemon from './currentPokemon';
+import * as setAppLoadingState from './setAppLoadingState';
 
-export const setCurrentPokemon = (pokemon) => ({
-  type: 'SET_CURRENT_POKEMON',
-  pokemon
-})
+export const ActionCreators = Object.assign({},
+  currentPokemon,
+  setAppLoadingState
+);

@@ -1,10 +1,10 @@
-const currentPokemon = (state = 'pikachu', action) => {
+const currentPokemonName = (state = 'pikachu', action) => {
   switch (action.type) {
-    case 'SET_CURRENT_POKEMON':
-      return action.pokemon
+    case 'SET_CURRENT_POKEMON_NAME':
+      return action.name
     default:
       return state
   }
 }
 
-export default currentPokemon
+export default currentPokemonName
