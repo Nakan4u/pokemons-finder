@@ -1,7 +1,7 @@
-import * as currentPokemon from './currentPokemon';
-import * as setAppLoadingState from './setAppLoadingState';
+import * as pokemons from './pokemons';
+import * as favorites from './favorites';
 
 export const ActionCreators = Object.assign({},
-  currentPokemon,
-  setAppLoadingState
+  pokemons,
+  favorites
 );

@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import currentPokemonName from './currentPokemon'
 import currentPokemonData from './currentPokemonData'
-import appLoadingState from './appLoadingState'
+import pokemonsListData from './pokemonsList'
 
 const pokeApp = combineReducers({
   currentPokemonName,
   currentPokemonData,
-  appLoadingState,
+  pokemonsListData
 })
 
 export default pokeApp

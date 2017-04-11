@@ -5,6 +5,7 @@ import List from './List.js';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Toast from 'react-native-simple-toast';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     AppRegistry,
     AlertIOS,
@@ -14,7 +15,7 @@ import {
     View
 } from 'react-native';
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -184,6 +185,16 @@ export default class Dashboard extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    console.log('dashboard component data', state);
+  return {
+    currentPokemonData: state.currentPokemonData
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard);
+
 Dashboard.propTypes = {
     pokemon: React.PropTypes.object.isRequired
 };

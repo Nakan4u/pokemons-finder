@@ -7,4 +7,4 @@ const currentPokemonName = (state = 'pikachu', action) => {
   }
 }
 
-export default currentPokemonName
+export default currentPokemonName;

@@ -74,7 +74,7 @@ class MainPage extends Component {
         super(props);
         this.state = {
             pokemonName: this.props.currentPokemonName,
-            isLoading: this.props.appLoadingState,
+            isLoading: false,
             error: false
         };
         console.log('this props: ', this.props);
@@ -89,7 +89,7 @@ class MainPage extends Component {
     handleSubmit() {
         // update our indicatorIOS spinner
         if (this.state.pokemonName) {
-            this.props.setAppLoadingState(true);
+            this.setState({isLoading: true});
             this.props.setCurrentPokemonName(this.state.pokemonName);
 
             // fetch data from pokemon api
@@ -108,8 +108,7 @@ class MainPage extends Component {
                         });
                         this.setState({
                             isLoading: false,
-                            error: false,
-                            pokemonName: ''
+                            error: false
                         })
                     }
                 })
@@ -121,20 +120,18 @@ class MainPage extends Component {
         this.setState({
             isLoading: true
         });
-        API.getList()
-            .then((res) => {
-                console.log(res);
+        this.props.getPokemonsList()
+            .then((data) => {
                 this.props.navigator.push({
                     title: "Pokemons list",
                     component: List,
-                    passProps: { title: "Pokemons list", pokemonList: res.results }
+                    passProps: { title: "Pokemons list", pokemonList: data }
                 });
                 this.setState({
                     isLoading: false,
                     error: false
                 })
-            })
-            .catch((error) => { console.error(error) });
+            });
     }
 
     render() {
@@ -167,7 +164,7 @@ class MainPage extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> Get pokemon list </Text>
                 </TouchableHighlight>
-                {/*<Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />*/}
+                <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
                 {showErr}
             </View>
         );
@@ -176,8 +173,7 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentPokemonName: state.currentPokemonName,
-    appLoadingState: state.appLoadingState
+    currentPokemonName: state.currentPokemonName
   }
 }
 
