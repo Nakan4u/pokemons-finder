@@ -1,8 +1,11 @@
 import Dashboard from './Dashboard.js';
-import Separator from './helpers/Separator.js';
+import Separator from '../components/helpers/Separator.js';
 import API from '../utils/api.js';
 import Spinner from 'react-native-loading-spinner-overlay';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
 import {
     AppRegistry,
     Text,
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class List extends Component {
+class List extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -64,7 +67,7 @@ export default class List extends Component {
     }
     goToProfile(pokemonName) {
         this.setState({isLoading: true});
-        API.getInfo(pokemonName)
+        this.props.getPokemon(pokemonName)
             .then((res) => {
                 if (res.detail === "Not found.") {
                     this.setState({
@@ -72,7 +75,6 @@ export default class List extends Component {
                         isLoading: false
                     })
                 } else {
-                    console.log(res);
                     this.props.navigator.push({
                         title: res.name || "Pokemon name",
                         component: Dashboard,
@@ -84,7 +86,9 @@ export default class List extends Component {
                     })
                 }
             })
-            .catch((error) => { console.error(error) });
+            .catch(() => {
+                this.setState({ isLoading: false });
+            });
     }
 
     render() {
@@ -116,6 +120,13 @@ export default class List extends Component {
         );
     }
 }
+
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect((state) => {return {}}, mapDispatchToProps)(List);
 
 List.propTypes = {
     title: React.PropTypes.string.isRequired,

@@ -1,4 +1,4 @@
-import Main from '../components/Main';
+import Main from './Main';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

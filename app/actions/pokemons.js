@@ -12,6 +12,7 @@ export function getPokemon(name) {
     return API.getInfo(name)
       .then((res) => {
         dispatch(setPokemon(res));
+        dispatch(setCurrentPokemonName(res.name));
         return res;
       })
       .catch((error) => { console.error('erorr with getting pokemon data ', error) });
@@ -33,6 +34,17 @@ export function getPokemonsList() {
         return res.results;
       })
       .catch((error) => { console.error('erorr with getting pokemons list data ', error) });
+  }
+}
+
+export function getPokemonsListBytype(type) {
+  return (dispatch, getState) => {
+    return API.getListBytype(type)
+      .then((res) => {
+        dispatch(setPokemonsList(res.pokemon));
+        return res;
+      })
+      .catch((error) => { console.error('erorr with getting pokemons list by type data ', error) });
   }
 }
 

@@ -1,11 +1,13 @@
 import API from '../utils/api.js';
 import styles from '../general.styles.js';
-import Badge from './Badge.js';
+import Badge from '../components/Badge.js';
 import List from './List.js';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Toast from 'react-native-simple-toast';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
 import {
     AppRegistry,
     AlertIOS,
@@ -25,6 +27,7 @@ class Dashboard extends Component {
             isLoading: false,
             error: false
         };
+        console.log('dashboard props: ', this.props);
     }
     componentDidMount() {
         this.checkIfPokemonInFavorites();
@@ -36,14 +39,12 @@ class Dashboard extends Component {
             id: this.state.pokemon.id
         }
         this.setState({ isLoading: true });
-        API.addFavoritePokeon(sendData)
+        this.props.addFavorite(sendData)
             .then((res) => {
-                console.log('Pokemon added ', res);
                 this.setState({ isLoading: false, isFavorite: true });
                 this.showNotification('Pokemon added to your favorites list');
             })
-            .catch((err) => {
-                console.log('error');
+            .catch(() => {
                 this.setState({ isLoading: false, error: 'problem whith adding to favorites' });
             })
     }
@@ -53,15 +54,13 @@ class Dashboard extends Component {
 
         if (storageId) {
             this.setState({ isLoading: true });
-            API.removeFavoritePokeon(storageId)
+            this.props.removeFavorite(storageId)
                 .then((res) => {
-                    console.log('Pokemon removed ', res);
                     this.setState({ isLoading: false, isFavorite: false });
                     this.showNotification('Pokemon removed from your favorites list');
                 })
-                .catch((err) => {
-                    console.log('error');
-                    this.setState({ isLoading: false, error: 'err' });
+                .catch(() => {
+                    this.setState({ isLoading: false, error: 'err with removing pokemon from favorites' });
                 })
         } else return;
     }
@@ -97,9 +96,8 @@ class Dashboard extends Component {
 
         this.setState({ isLoading: true });
 
-        API.getFavoritePokemons()
+        this.props.getFavoritePokemons()
             .then((res) => {
-                console.log('favorites', res);
                 convertedData = this._convertData(res); // conver data to be the same as pokemon API list response;
                 this.setState({ isLoading: false });
                 this.props.navigator.push({
@@ -108,8 +106,7 @@ class Dashboard extends Component {
                     passProps: { title: "Favorites list", pokemonList: convertedData }
                 });
             })
-            .catch((err) => {
-                console.error(err);
+            .catch(() => {
                 this.setState({ isLoading: false, error: 'error with getting favorites pokemos API' });
             })
     }
@@ -118,9 +115,8 @@ class Dashboard extends Component {
         var pokemonName = this.state.pokemon.name;
 
         this.setState({ isLoading: true });
-        API.getFavoritePokemons()
+        this.props.getFavoritePokemons()
             .then((res) => {
-                console.log('favorites', res);
                 // check if pokemon already mentioned in favorites list obj
                 for (var prop in res) {
                     if (pokemonName === res[prop].name) {
@@ -131,8 +127,7 @@ class Dashboard extends Component {
                 this.setState({ isLoading: false });
                 return false;
             })
-            .catch((err) => {
-                console.error(err);
+            .catch(() => {
                 this.setState({ isLoading: false });
             })
     }
@@ -140,7 +135,7 @@ class Dashboard extends Component {
     getPokemonsListByType(type) {
         this.setState({ isLoading: true });
         // fetch data from pokemon api
-        API.getListBytype(type.url)
+        this.props.getPokemonsListBytype(type.url)
             .then((res) => {
                 this.setState({ isLoading: false });
                 if (res.detail === "Not found.") {
@@ -160,7 +155,9 @@ class Dashboard extends Component {
                     })
                 }
             })
-            .catch((error) => { console.error(error) });
+            .catch(() => { 
+                this.setState({ isLoading: false });
+            });
     }
 
     render() {
@@ -187,13 +184,16 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('dashboard component data', state);
   return {
     currentPokemonData: state.currentPokemonData
   }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 Dashboard.propTypes = {
     pokemon: React.PropTypes.object.isRequired
