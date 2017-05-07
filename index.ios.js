@@ -1,4 +1,4 @@
-import AppContainer from './app/containers/AppContainer';
+import AppContainer from './app/containers.v1/AppContainer';
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
