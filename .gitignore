@@ -1,5 +1,6 @@
 #custom
 android/
+ios/
 __tests__/
 *config
 index.android.js
