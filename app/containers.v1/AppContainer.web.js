@@ -13,7 +13,7 @@ import {
   View
 } from 'react-native';
 import { browserHistory } from 'react-router'
-import { NativeRouter as Router, Route, Link } from 'react-router-native';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const styles = StyleSheet.create({
   container: {

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         padding: 30,
-        // marginTop: 25,
+        marginTop: 5,
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: '#48BBEC'
@@ -123,12 +123,6 @@ class MainPage extends Component {
                 })
                 this.props.setPokemonsList(data);
                 this.props.history.push('/list');
-
-                // this.props.navigator.push({
-                //     title: "Pokemons list",
-                //     component: List,
-                //     passProps: { title: "Pokemons list", pokemonList: data }
-                // });
             });
     }
 

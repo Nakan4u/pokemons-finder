@@ -1,46 +1,39 @@
+import AppContainer from './app/containers.v1/AppContainer.web.js';
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+import reducer from './app/reducers'
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
+function configureStore(initialState) {
+  const enhancer = composeEnhancers(
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+    ),
+  );
+  return createStore(
+    reducer,
+    initialState,
+    enhancer
+  );
+}
+
+const store = configureStore({});
+
+const App = () => (
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>
 )
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-      </ul>
-
-      <hr/>
-
-      <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-    </div>
-  </Router>
-)
-export default BasicExample
-
-
-AppRegistry.registerComponent('ReactNativeWeb', () => BasicExample);
+AppRegistry.registerComponent('ReactNativeWeb', () => App);
 AppRegistry.runApplication('ReactNativeWeb', { rootTag: document.getElementById('react-app') });
