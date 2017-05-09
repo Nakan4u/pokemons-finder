@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import {
     AppRegistry,
+    ActivityIndicator,
     Text,
     View,
     ScrollView,
@@ -63,6 +64,8 @@ class List extends Component {
         };
     }
     goToProfile(pokemonName) {
+        if (this.state.isLoading) return; //prevent multiply clicks
+
         this.setState({isLoading: true});
         this.props.getPokemon(pokemonName)
             .then((res) => {
@@ -78,14 +81,10 @@ class List extends Component {
                     });
                     this.props.setPokemon(res);
                     this.props.history.push('/pokemon');
-                    // this.props.navigator.push({
-                    //     title: res.name || "Pokemon name",
-                    //     component: Dashboard,
-                    //     passProps: { pokemon: res, isFavorite: this.props.title === 'Favorites list' }
-                    // });
                 }
             })
-            .catch(() => {
+            .catch((err) => {
+                console.error(err);
                 this.setState({ isLoading: false });
             });
     }
@@ -115,7 +114,7 @@ class List extends Component {
                             <Separator></Separator>
                         </View>
                     }} />
-                {/*<Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />*/}
+                <ActivityIndicator animating={this.state.isLoading} size='large' />
             </View>
         );
     }

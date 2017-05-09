@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import {
     AppRegistry,
-    AlertIOS,
+    ActivityIndicator,
     Text,
     Image,
     TouchableHighlight,
@@ -36,6 +36,7 @@ class Dashboard extends Component {
             name: this.state.pokemon.name,
             id: this.state.pokemon.id
         }
+        if (this.state.isLoading) return; //prevent multiply clicks
         this.setState({ isLoading: true });
         this.props.addFavorite(sendData)
             .then((res) => {
@@ -49,7 +50,7 @@ class Dashboard extends Component {
 
     removeFromFavorites() {
         var storageId = this.state.storageId;
-
+        if (this.state.isLoading) return; //prevent multiply clicks
         if (storageId) {
             this.setState({ isLoading: true });
             this.props.removeFavorite(storageId)
@@ -91,6 +92,7 @@ class Dashboard extends Component {
     goToFavorites() {
         var convertedData;
 
+        if (this.state.isLoading) return; //prevent multiply clicks
         this.setState({ isLoading: true });
 
         this.props.getFavoritePokemons()
@@ -108,6 +110,7 @@ class Dashboard extends Component {
     checkIfPokemonInFavorites() {
         var pokemonName = this.state.pokemon.name;
 
+        if (this.state.isLoading) return; //prevent multiply clicks
         this.setState({ isLoading: true });
         this.props.getFavoritePokemons()
             .then((res) => {
@@ -167,7 +170,7 @@ class Dashboard extends Component {
                     underlayColor="blue">
                     <Text style={styles.buttonText}> Go to favorites </Text>
                 </TouchableHighlight>
-                {/*<Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />*/}
+                <ActivityIndicator animating={this.state.isLoading} size='large' />
             </View>
         );
     }

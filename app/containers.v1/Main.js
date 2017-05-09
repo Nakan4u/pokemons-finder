@@ -5,6 +5,7 @@ import { ActionCreators } from '../actions';
 import { withRouter } from 'react-router-dom';
 import {
     AppRegistry,
+    ActivityIndicator,
     Text,
     StyleSheet,
     TextInput,
@@ -85,7 +86,8 @@ class MainPage extends Component {
         })
     }
     handleSubmit() {
-        // update our indicatorIOS spinner
+        if (this.state.isLoading) return; //prevent multiply clicks
+
         if (this.state.pokemonName) {
             this.setState({ isLoading: true });
             this.props.setCurrentPokemonName(this.state.pokemonName);
@@ -107,14 +109,18 @@ class MainPage extends Component {
                         this.props.history.push('/pokemon');
                     }
                 })
+                .catch((err) => {
+                    console.error(err);
+                    this.setState({ isLoading: false });
+                });
         } else {
             this.setState({ error: 'search field shouldn\'t be empty' });
         }
     }
     getList() {
-        this.setState({
-            isLoading: true
-        });
+        if (this.state.isLoading) return; //prevent multiply clicks
+
+        this.setState({ isLoading: true });
         this.props.getPokemonsList()
             .then((data) => {
                 this.setState({
@@ -123,6 +129,10 @@ class MainPage extends Component {
                 })
                 this.props.setPokemonsList(data);
                 this.props.history.push('/list');
+            })
+            .catch((err) => {
+                console.error(err);
+                this.setState({ isLoading: false });
             });
     }
 
@@ -156,7 +166,7 @@ class MainPage extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> Get pokemon list </Text>
                 </TouchableHighlight>
-                {/*<Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />*/}
+                <ActivityIndicator animating={this.state.isLoading} size='large' />
                 {showErr}
             </View>
         );
