@@ -1,10 +1,7 @@
-import Separator from '../components/helpers/Separator.js';
-import API from '../utils/api.js';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
 import {
     AppRegistry,
     ActivityIndicator,
@@ -16,17 +13,12 @@ import {
     TouchableHighlight
 } from 'react-native';
 
+import { ActionCreators } from '../actions';
+import API from '../utils/api.js';
+import Separator from '../components/helpers/Separator.js';
+import stylesGenerel from '../styles.general.js';
+
 const styles = StyleSheet.create({
-    container: {
-        padding: 25,
-        flex: 1
-    },
-    title: {
-        fontSize: 24,
-        color: '#48BBEC',
-        alignSelf: 'center',
-        marginBottom: 15
-    },
     listWrapper: {
         height: 400,
         padding: 10,
@@ -40,16 +32,10 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         padding: 10,
     },
-    rowContainer: {
-        // flexGrow: 1,
-        // height: 20
-    },
     rowTitle: {
         color: '#48BBEC',
         fontSize: 20,
         padding: 5
-    },
-    rowContent: {
     }
 });
 
@@ -91,13 +77,13 @@ class List extends Component {
 
     render() {
         var showErr = (
-            this.state.error ? <Text style={styles.error}> {this.state.error} </Text> : <View></View>
+            this.state.error ? <Text style={stylesGenerel.error}> {this.state.error} </Text> : <View></View>
         ),
             title = this.props.match.params.type ? this.props.match.params.type + ' pokemons list :' : 'Pokemons list :';
 
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}> {title} </Text>
+            <View style={stylesGenerel.container}>
+                <Text style={stylesGenerel.title}> {title} </Text>
                 {showErr}
                 <ListView
                     dataSource={this.state.dataSource}

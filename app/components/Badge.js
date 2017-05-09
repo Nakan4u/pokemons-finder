@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        height: 100,
-        width: 100,
+        height: 200,
+        width: 200,
         borderWidth: 1,
         borderRadius: 10,
         borderColor: '#48BBEC',
@@ -52,7 +52,9 @@ export default class Badge extends Component {
         var obj = {
             padding: 5,
             margin: 5,
-            borderRadius: 10
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: '#48BBEC'
         }
         switch (type) {
             case 'normal':

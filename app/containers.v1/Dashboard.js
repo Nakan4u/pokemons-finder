@@ -1,11 +1,7 @@
-import API from '../utils/api.js';
-import styles from '../general.styles.js';
-import Badge from '../components/Badge.js';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
 import {
     AppRegistry,
     ActivityIndicator,
@@ -14,6 +10,11 @@ import {
     TouchableHighlight,
     View
 } from 'react-native';
+
+import { ActionCreators } from '../actions';
+import API from '../utils/api.js';
+import Badge from '../components/Badge.js';
+import styles from '../styles.general.js';
 
 class Dashboard extends Component {
     constructor(props) {

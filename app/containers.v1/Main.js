@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
 import { withRouter } from 'react-router-dom';
 import {
     AppRegistry,
@@ -13,12 +12,14 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import { ActionCreators } from '../actions';
+import stylesGenerel from '../styles.general.js';
 
-
+// blue-white color theme styles
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        padding: 30,
+        padding: 25,
         marginTop: 5,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 18,
-        color: '#111',
+        color: '#48BBEC',
         alignSelf: 'center'
     },
     button: {
@@ -61,11 +62,6 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         alignSelf: 'stretch',
         justifyContent: 'center'
-    },
-    error: {
-        fontSize: 18,
-        color: 'red',
-        textAlign: 'center'
     }
 });
 
@@ -138,7 +134,7 @@ class MainPage extends Component {
 
     render() {
         var showErr = (
-            this.state.error ? <Text style={styles.error}> {this.state.error} </Text> : <View></View>
+            this.state.error ? <Text style={stylesGenerel.error}> {this.state.error} </Text> : <View></View>
         ),
             disabled = !this.state.pokemonName;
         return (
