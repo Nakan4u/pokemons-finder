@@ -4,6 +4,10 @@ module.exports = {
   entry: {
     main: './index.web.js',
   },
+  devServer: {
+    port: 8080,
+    historyApiFallback: true
+  },
   module: {
     loaders: [
       {
