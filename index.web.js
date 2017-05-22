@@ -9,7 +9,7 @@ import { browserHistory } from 'react-router';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import reducer from './app/reducers';
-import AppContainer from './app/containers.v1/AppContainer';
+import AppContainer from './app/web/containers/AppContainer';
 
 const composeEnhancers =
   typeof window === 'object' &&
