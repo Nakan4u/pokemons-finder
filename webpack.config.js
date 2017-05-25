@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -18,6 +19,12 @@ module.exports = {
           presets: ['es2015', 'react'],
         },
       },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({ 
+          fallback: 'style-loader', 
+          use: 'css-loader?sourceMap!sass-loader?sourceMap' })
+      }
     ],
   },
   resolve: {
@@ -26,4 +33,10 @@ module.exports = {
       'react-router-native': 'react-router-dom'
     },
   },
+  output: {
+    filename: 'app/web/bundle.js'
+  },
+  plugins: [
+    new ExtractTextPlugin('app/web/bundle.css')
+  ]
 };

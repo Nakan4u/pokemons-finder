@@ -29,12 +29,17 @@
     "webpack": "^2.4.1"
   },
   "devDependencies": {
+    "css-loader": "^0.28.2",
     "eslint": "^3.4.0",
     "eslint-config-recommended": "^1.5.0",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-react-native": "^2.2.1",
+    "extract-text-webpack-plugin": "^2.1.0",
     "jest": "18.1.0",
+    "node-sass": "^4.5.3",
     "react-test-renderer": "15.4.2",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.1",
     "webpack-dev-server": "^2.4.5"
   },
   "jest": {

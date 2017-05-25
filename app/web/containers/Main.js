@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { ActionCreators } from '../../actions';
 
+// Stylesheets
+require('./Main.scss');
+
 class MainPage extends Component {
     constructor(props) {
         super(props);
@@ -14,11 +17,25 @@ class MainPage extends Component {
         };
     }
 
+    handleChange(event) {
+        this.setState({
+            pokemonName: event.nativeEvent.text,
+            error: false
+        })
+    }
+
     render() {
 
         return (
-            <div>
-                <h1>Hello world from react web!</h1>
+            <div className="mainContainer">
+                <h1>Welcome to Pokemons finder app!</h1>
+                <form name="main">
+                    <label htmlFor="pokemonName">Type pokemon name or id to find them</label>
+                    <input id="pokemonName" name="pokemonName" type="text" 
+                        value={this.state.pokemonName} onChange={this.handleChange.bind(this)} />
+                    <button type="submit">Search</button>
+                    <button>Get pokemon list</button>
+                </form>
             </div>
         );
     }
