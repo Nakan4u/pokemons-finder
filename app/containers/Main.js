@@ -77,7 +77,6 @@ class MainPage extends Component {
             isLoading: false,
             error: false
         };
-        console.log('this props: ', this.props);
     }
 
     handleChange(event) {

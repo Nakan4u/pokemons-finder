@@ -2,40 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+
 import { ActionCreators } from '../../actions';
+import MainPage from '../../containers.v1/Main';
 
-// Stylesheets
-require('./Main.scss');
-
-class MainPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            pokemonName: this.props.currentPokemonName,
-            isLoading: false,
-            error: false
-        };
-    }
+class MainPageWeb extends MainPage {
 
     handleChange(event) {
         this.setState({
-            pokemonName: event.nativeEvent.text,
+            pokemonName: event.nativeEvent.target.value,
             error: false
         })
     }
 
     render() {
+        var showErr = (
+            this.state.error ? <p className="error">{this.state.error} </p> : <p></p>
+        );
 
         return (
             <div className="mainContainer">
-                <h1>Welcome to Pokemons finder app!</h1>
+                <h1>Welcome to Pokemons finder web app!</h1>
                 <form name="main">
                     <label htmlFor="pokemonName">Type pokemon name or id to find them</label>
                     <input id="pokemonName" name="pokemonName" type="text" 
                         value={this.state.pokemonName} onChange={this.handleChange.bind(this)} />
-                    <button type="submit">Search</button>
-                    <button>Get pokemon list</button>
+                    <button onClick={super.handleSubmit.bind(this)} disabled={!this.state.pokemonName}>Search</button>
+                    <button onClick={super.getList.bind(this)}>Get pokemon list</button>
                 </form>
+                <span>{this.state.isLoading ? 'loading...' : ''}</span>
+                {showErr}
             </div>
         );
     }
@@ -51,6 +47,5 @@ function mapStateToProps(state) {
         currentPokemonName: state.currentPokemonName
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage));
-
-// AppRegistry.registerComponent('MainPage', () => MainPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPageWeb));
+// export default withRouter(MainPageWeb);

@@ -27,7 +27,6 @@ class Dashboard extends Component {
             isLoading: false,
             error: false
         };
-        console.log('dashboard props: ', this.props);
     }
     componentDidMount() {
         this.checkIfPokemonInFavorites();
@@ -143,7 +142,6 @@ class Dashboard extends Component {
                         error: 'Pokemons not found'
                     })
                 } else {
-                    console.log("pokemons list by type ", res);
                     this.props.navigator.push({
                         title: type.name || "",
                         component: List,

@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 class AppContainer extends React.Component {
 
   render() {
-    console.log('cont state:', this.props.appLoadingState);
     return (
       <NavigatorIOS
         style={styles.container}
