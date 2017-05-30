@@ -1,6 +1,11 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const extractSass = new ExtractTextPlugin({
+  filename: "app/web/bundle.css",
+  disable: process.env.NODE_ENV === "development"
+});
+
 module.exports = {
   entry: {
     main: './index.web.js',
@@ -11,20 +16,22 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react'],
-        },
+    {
+      test: /\.css(\.js)?$/,
+      loaders: ['style-loader', 'css-loader']
+    },
+    {
+      test: /\.css\.js$/,
+      loader: 'css-js-loader',
+    },
+    {
+      test: /\.js?$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['es2015', 'react'],
       },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({ 
-          fallback: 'style-loader', 
-          use: 'css-loader?sourceMap!sass-loader?sourceMap' })
-      }
+    },
     ],
   },
   resolve: {
@@ -37,6 +44,6 @@ module.exports = {
     filename: 'app/web/bundle.js'
   },
   plugins: [
-    new ExtractTextPlugin('app/web/bundle.css')
+    extractSass
   ]
 };

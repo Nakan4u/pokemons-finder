@@ -115,8 +115,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List));
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List));
+withRouter(connect(mapStateToProps, mapDispatchToProps)(List));
+export default List;
 
 List.propTypes = {
     pokemonsListData: React.PropTypes.array.isRequired

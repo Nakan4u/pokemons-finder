@@ -26,7 +26,6 @@ class Dashboard extends Component {
             isLoading: false,
             error: false
         };
-        console.log('dashboard props: ', this.props);
     }
     componentDidMount() {
         this.checkIfPokemonInFavorites();
@@ -186,8 +185,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
+withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
+export default Dashboard;
 
 Dashboard.propTypes = {
     currentPokemonData: React.PropTypes.object.isRequired

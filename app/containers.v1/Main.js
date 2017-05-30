@@ -81,7 +81,8 @@ class MainPage extends Component {
             error: false
         })
     }
-    handleSubmit() {
+    handleSubmit(event) {
+        if (event) event.preventDefault();
         if (this.state.isLoading) return; //prevent multiply clicks
 
         if (this.state.pokemonName) {
@@ -113,7 +114,8 @@ class MainPage extends Component {
             this.setState({ error: 'search field shouldn\'t be empty' });
         }
     }
-    getList() {
+    getList(event) {
+        if (event) event.preventDefault();
         if (this.state.isLoading) return; //prevent multiply clicks
 
         this.setState({ isLoading: true });
@@ -179,6 +181,8 @@ function mapStateToProps(state) {
         currentPokemonName: state.currentPokemonName
     }
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage));
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage));
+withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage));
+export default MainPage;
 
 AppRegistry.registerComponent('MainPage', () => MainPage);
