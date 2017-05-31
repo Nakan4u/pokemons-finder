@@ -6,7 +6,7 @@ import { Route } from 'react-router-native';
 
 import Header from './Header';
 import { ActionCreators } from '../actions';
-import routes from '../routes.config.js';
+import routes from '../native/routes.config.js';
 import RouteWithSubRoutes from '../helpers.js';
 
 const styles = StyleSheet.create({

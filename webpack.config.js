@@ -11,27 +11,27 @@ module.exports = {
     main: './index.web.js',
   },
   devServer: {
-    port: 8080,
+    port: 8082,
     historyApiFallback: true
   },
   module: {
     loaders: [
-    {
-      test: /\.css(\.js)?$/,
-      loaders: ['style-loader', 'css-loader']
-    },
-    {
-      test: /\.css\.js$/,
-      loader: 'css-js-loader',
-    },
-    {
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['es2015', 'react'],
+      {
+        test: /\.css(\.js)?$/,
+        loaders: ['style-loader', 'css-loader']
       },
-    },
+      {
+        test: /\.css\.js$/,
+        loader: 'css-js-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react'],
+        },
+      },
     ],
   },
   resolve: {

@@ -1,22 +1,21 @@
-import { StyleSheet } from 'react-native';
 // white-blue color theme styles
-var styles = StyleSheet.create({
-    container: {
+export default {
+    '.container': {
         padding: 25,
         flex: 1
     },
-    title: {
+    '.title': {
         fontSize: 25,
         color: '#48BBEC',
         alignSelf: 'center',
         marginBottom: 15
     },
-    buttonText: {
+    '.buttonText': {
         fontSize: 18,
         color: 'white',
         alignSelf: 'center'
     },
-    button: {
+    '.button': {
         height: 50,
         flexDirection: 'row',
         backgroundColor: '#48BBEC',
@@ -28,11 +27,9 @@ var styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center'
     },
-    error: {
+    '.error': {
         fontSize: 18,
         color: 'red',
         textAlign: 'center'
     }
-});
-
-module.exports = styles;
+}

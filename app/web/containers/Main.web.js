@@ -4,9 +4,11 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import { ActionCreators } from '../../actions';
-import MainPage from '../../containers.v1/Main';
+import MainPage from '../../containers.v2/Main';
 
-import { ResponsiveStyles } from './Main.css.js';
+import { responsiveStyles } from '../../native/containers/Main.css.js';
+import { generalStyles } from '../../native/styles.general.css.js';
+
 require('./Main.css');
 
 class MainPageWeb extends MainPage {
@@ -30,10 +32,10 @@ class MainPageWeb extends MainPage {
                     <label className="instructions" htmlFor="pokemonName">Type pokemon name or id to find them</label>
                     <input id="pokemonName" className="searchInput" name="pokemonName" type="text" 
                         value={this.state.pokemonName} onChange={this.handleChange.bind(this)} />
-                    <button className="button"  onClick={super.handleSubmit.bind(this)} disabled={!this.state.pokemonName}>
+                    <button className="button" onClick={super.handleSubmit.bind(this)} disabled={!this.state.pokemonName}>
                         <span className="buttonText">Search</span>
                     </button>
-                    <button className="button"  onClick={super.getList.bind(this)}>
+                    <button className="button" onClick={super.getList.bind(this)}>
                         <span className="buttonText">Get pokemon list</span>
                     </button>
                 </form>

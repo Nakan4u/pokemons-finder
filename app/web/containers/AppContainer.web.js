@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route } from 'react-router-dom';
 
-import Header from './Header';
+import Header from './Header.web';
 import { ActionCreators } from '../../actions';
 import routes from '../routes.config.js';
 import RouteWithSubRoutes from '../../helpers.js';

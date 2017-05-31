@@ -1,6 +1,6 @@
-import Main from './containers.v1/Main';
-import Dashboard from './containers.v1/Dashboard';
-import List from './containers.v1/List';
+import Main from './containers/Main.native';
+import Dashboard from './containers/Dashboard.native';
+import List from './containers/List.native';
 
 const routes = [
     {

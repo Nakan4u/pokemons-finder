@@ -1,6 +1,6 @@
-import Main from './containers/Main';
-import Dashboard from './containers/Dashboard';
-import List from './containers/List';
+import Main from './containers/Main.web';
+import Dashboard from './containers/Dashboard.web';
+import List from './containers/List.web';
 
 const routes = [
     {

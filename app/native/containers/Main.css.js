@@ -27,14 +27,15 @@ export default {
         borderWidth: 1,
         borderColor: 'white',
         borderRadius: 8,
-        color: 'white'
+        color: 'white',
+        backgroundColor: '#48BBEC'
     },
     '.buttonText': {
         fontSize: 18,
         color: '#48BBEC',
         alignSelf: 'center'
     },
-    'button': {
+    '.button': {
         height: 50,
         flexDirection: 'row',
         backgroundColor: 'white',

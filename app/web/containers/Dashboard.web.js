@@ -5,7 +5,9 @@ import { withRouter } from 'react-router-dom';
 
 import { ActionCreators } from '../../actions';
 import Badge from '../components/Badge';
-import Dashboard from '../../containers.v1/Dashboard';
+import Dashboard from '../../containers.v2/Dashboard';
+
+import { responsiveStyles } from '../../native/styles.general.css.js';
 
 class DashboardWeb extends Dashboard {
 
@@ -41,7 +43,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DashboardWeb));
-
-DashboardWeb.propTypes = {
-    currentPokemonData: React.PropTypes.object.isRequired
-};

@@ -4,14 +4,16 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import { ActionCreators } from '../../actions';
-import List from '../../containers.v1/List';
+import List from '../../containers.v2/List';
+
+import { responsiveStyles } from '../../native/containers/List.css.js';
+import { generalStyles } from '../../native/styles.general.css.js';
 
 class ListWeb extends List {
 
-
     render() {
         var showErr = (
-            this.state.error ? <p style={stylesGenerel.error}> {this.state.error} </p> : <p></p>
+            this.state.error ? <p className="error"> {this.state.error} </p> : <p></p>
         ),
             title = this.props.match.params.type ? this.props.match.params.type + ' pokemons list :' : 'Pokemons list :';
 
@@ -31,7 +33,7 @@ class ListWeb extends List {
         };
 
         return (
-            <div className="general container">
+            <div className="container">
                 <h1> {title} </h1>
                 {showErr}
                 <ol>
@@ -54,7 +56,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListWeb));
-
-ListWeb.propTypes = {
-    pokemonsListData: React.PropTypes.array.isRequired
-};
