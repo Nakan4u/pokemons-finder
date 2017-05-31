@@ -9,7 +9,7 @@ import { browserHistory } from 'react-router';
 import { NativeRouter as Router, Route, Link } from 'react-router-native';
 
 import reducer from './app/reducers';
-import AppContainer from './app/containers.v1/AppContainer';
+import AppContainer from './app/native/containers/AppContainer';
 
 // middleware that logs actions
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });

@@ -31,7 +31,7 @@ class MainPage extends MainClass {
         return (
             <View style={styles['.mainContainer']}>
                 <Text style={styles['.title']}>
-                    Welcome to Pokemons finder app123!
+                    Welcome to Pokemons finder native app!
                 </Text>
                 <Text style={styles['.instructions']}>
                     Type pokemon name or id to find them

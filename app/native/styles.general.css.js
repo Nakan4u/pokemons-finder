@@ -1,5 +1,9 @@
 // white-blue color theme styles
 export default {
+    '.appContainer': {
+        flex: 1,
+        backgroundColor: '#F5FCFF',
+    },
     '.container': {
         padding: 25,
         flex: 1
