@@ -7,8 +7,6 @@ import { ActionCreators } from '../../actions';
 import MainPage from '../../containers.v2/Main';
 
 import { responsiveStyles } from '../../native/containers/Main.css.js';
-import { generalStyles } from '../../native/styles.general.css.js';
-
 require('./Main.css');
 
 class MainPageWeb extends MainPage {
@@ -29,7 +27,7 @@ class MainPageWeb extends MainPage {
             <div className="mainContainer">
                 <h1 className="title">Welcome to Pokemons finder web app!</h1>
                 <form className="mainForm" name="main">
-                    <label className="instructions" htmlFor="pokemonName">Type pokemon name or id to find them</label>
+                    <label className="instructions" htmlFor="pokemonName">Type pokemon name or id to find them: </label>
                     <input id="pokemonName" className="searchInput" name="pokemonName" type="text" 
                         value={this.state.pokemonName} onChange={this.handleChange.bind(this)} />
                     <button className="button" onClick={super.handleSubmit.bind(this)} disabled={!this.state.pokemonName}>

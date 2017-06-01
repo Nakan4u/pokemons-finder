@@ -1,0 +1,9 @@
+.badgeContainer {
+    margin-top: 0;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.typeWrapper {
+    display: flex;
+}

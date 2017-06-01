@@ -7,7 +7,6 @@ import { ActionCreators } from '../../actions';
 import List from '../../containers.v2/List';
 
 import { responsiveStyles } from '../../native/containers/List.css.js';
-import { generalStyles } from '../../native/styles.general.css.js';
 
 class ListWeb extends List {
 
@@ -34,7 +33,7 @@ class ListWeb extends List {
 
         return (
             <div className="container">
-                <h1> {title} </h1>
+                <h1 className="title"> {title} </h1>
                 {showErr}
                 <ol>
                     {listItems}

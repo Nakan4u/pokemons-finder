@@ -8,12 +8,13 @@ import { ActionCreators } from '../../actions';
 import routes from '../routes.config.js';
 import RouteWithSubRoutes from '../../helpers.js';
 
+import { generalStyles } from '../../native/styles.general.css.js';
 
 class AppContainer extends React.Component {
 
   render() {
     return (
-      <div style={{flex: 1, backgroundColor: '#F5FCFF'}}>
+      <div className="appContainer">
         <Header />
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />

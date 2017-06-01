@@ -1,0 +1,24 @@
+.dashboard .buttonsWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/*desctop styles;*/
+@media (min-width: 768px) {
+    .dashboard .buttonsWrapper {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .dashboard .button {
+        flex: 1;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+/*responsive styles*/
+@media (max-width: 767px) {
+    .dashboard .buttonsWrapper {
+        flex-direction: column;
+        justify-content: center;
+    }
+}

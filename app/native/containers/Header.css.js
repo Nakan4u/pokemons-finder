@@ -11,5 +11,6 @@ export default {
         color: '#48BBEC',
         alignItems: 'center',
         padding: 10,
+        textDecoration: 'none'
     }
 }
