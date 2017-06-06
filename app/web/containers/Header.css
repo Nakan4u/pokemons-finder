@@ -1,0 +1,10 @@
+.header {
+    height: auto;
+    display: flex;
+    border-bottom: 1px solid #48BBEC;
+    margin-top: 0;
+}
+.navItem {
+    text-decoration: none;
+    flex: inherit;
+}

@@ -19,17 +19,15 @@ export default {
     },
     '.type': {
         fontSize: 14,
-        lineHeight: 1,
-        color: '#fff',
-        alignSelf: 'center',
+        margin: 5,
+        color: '#48BBEC',
+        alignSelf: 'center'
     },
     '.typeInner': {
-        padding: 5,
         margin: 5,
         borderWidth: 1,
-        borderRadius: 10,
         borderColor: '#48BBEC',
-        textDecoration: 'none'
+        borderStyle: 'solid',
     },
     '.typeWrapper': {
         flex: 1,

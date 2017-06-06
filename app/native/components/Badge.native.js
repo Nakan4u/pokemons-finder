@@ -9,18 +9,20 @@ import {
 } from 'react-native';
 import BadgeClass from '../../components/Badge';
 import stylesLocal from './Badge.css.js';
+import stylesGlobal from '../styles.general.css.js';
 
 const styles = StyleSheet.create(stylesLocal);
+const stylesGenerel = StyleSheet.create(stylesGlobal);
 
-class Badge extends BadgeClass {
+export default class Badge extends BadgeClass {
 
     render() {
         var pokemon = this.props.pokemon;
         var list = pokemon.types.map((item, index) => {
             if (item.type.name) {
                 return (
-                    <View style={styles['.typeInner']}>
-                        <TouchableHighlight key={index}
+                    <View key={index} style={styles['.typeInner']}>
+                        <TouchableHighlight
                             style={this.makeBackground(item.type.name)}
                             onPress={this.props.getPokemonsListByTypeHandler.bind(this, item.type)}>
                             <Text style={styles['.type']}> {item.type.name} </Text>
@@ -33,7 +35,7 @@ class Badge extends BadgeClass {
         });
         return (
             <View style={styles['.badgeContainer']}>
-                <Text style={styles['.title']}> {pokemon.name} </Text>
+                <Text style={stylesGenerel['.title']}> {pokemon.name} </Text>
                 <Image source={{ uri: pokemon.sprites.front_default }} style={styles['.image']}></Image>
                 <Text style={styles['.info']}> Type to get pokemons list with same type:</Text>
                 <View style={styles['.typeWrapper']}>

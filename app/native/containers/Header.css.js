@@ -10,7 +10,6 @@ export default {
         fontSize: 14,
         color: '#48BBEC',
         alignItems: 'center',
-        padding: 10,
-        textDecoration: 'none'
+        padding: 10
     }
 }

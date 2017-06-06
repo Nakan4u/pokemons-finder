@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 export default class Badge extends Component {
     makeBackground(type) {
         var obj = {}
