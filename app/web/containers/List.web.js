@@ -7,6 +7,7 @@ import { ActionCreators } from '../../actions';
 import List from '../../containers.v2/List';
 
 import { responsiveStyles } from '../../native/containers/List.css.js';
+require('./List.css');
 
 class ListWeb extends List {
 
@@ -35,7 +36,7 @@ class ListWeb extends List {
             <div className="container">
                 <h1 className="title"> {title} </h1>
                 {showErr}
-                <ol>
+                <ol className="list">
                     {listItems}
                 </ol>
                 <span>{this.state.isLoading ? 'loading...' : ''}</span>

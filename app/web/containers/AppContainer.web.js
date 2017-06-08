@@ -9,6 +9,7 @@ import routes from '../routes.config.js';
 import RouteWithSubRoutes from '../../helpers.js';
 
 import { generalStyles } from '../../native/styles.general.css.js';
+require('../general.styles.css');
 
 class AppContainer extends React.Component {
 

@@ -20,7 +20,7 @@ export default {
     '.type': {
         fontSize: 14,
         margin: 5,
-        color: '#48BBEC',
+        color: '#fff',
         alignSelf: 'center'
     },
     '.typeInner': {

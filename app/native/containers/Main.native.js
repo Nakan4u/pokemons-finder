@@ -53,7 +53,7 @@ class MainPage extends MainClass {
                     underlayColor="white">
                     <Text style={styles['.buttonText']}> Get pokemon list </Text>
                 </TouchableHighlight>
-                <ActivityIndicator animating={this.state.isLoading} size='large' />
+                <ActivityIndicator animating={this.state.isLoading} size='large' color='white' />
                 {showErr}
             </View>
         );
