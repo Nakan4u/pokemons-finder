@@ -13,7 +13,7 @@ import {
     View
 } from 'react-native';
 import { ActionCreators } from '../../actions';
-import MainClass from '../../containers.v2/Main';
+import MainClass from '../../containers/Main';
 
 import stylesGlobal from '../styles.general.css.js';
 import stylesLocal from './Main.css.js';

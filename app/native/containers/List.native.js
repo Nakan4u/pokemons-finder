@@ -16,7 +16,7 @@ import {
 import { ActionCreators } from '../../actions';
 import API from '../../utils/api.js';
 import Separator from '../../components/helpers/Separator';
-import ListClass from '../../containers.v2/List';
+import ListClass from '../../containers/List';
 
 import stylesGlobal from '../styles.general.css.js';
 import stylesLocal from './List.css.js';

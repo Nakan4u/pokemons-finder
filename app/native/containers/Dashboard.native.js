@@ -15,7 +15,7 @@ import {
 import { ActionCreators } from '../../actions';
 import API from '../../utils/api';
 import Badge from '../components/Badge.native';
-import DashboardClass from '../../containers.v2/Dashboard';
+import DashboardClass from '../../containers/Dashboard';
 
 import stylesGenerel from '../styles.general.css.js';
 

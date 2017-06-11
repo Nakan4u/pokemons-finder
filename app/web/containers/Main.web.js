@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import { ActionCreators } from '../../actions';
-import MainPage from '../../containers.v2/Main';
+import MainPage from '../../containers/Main';
 
 import { responsiveStyles } from '../../native/containers/Main.css.js';
 require('./Main.css');

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import { ActionCreators } from '../../actions';
 import Badge from '../components/Badge';
-import Dashboard from '../../containers.v2/Dashboard';
+import Dashboard from '../../containers/Dashboard';
 
 import { responsiveStyles } from '../../native/styles.general.css.js';
 require('./Dashboard.css');

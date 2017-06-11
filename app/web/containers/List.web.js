@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import { ActionCreators } from '../../actions';
-import List from '../../containers.v2/List';
+import List from '../../containers/List';
 
 import { responsiveStyles } from '../../native/containers/List.css.js';
 require('./List.css');
