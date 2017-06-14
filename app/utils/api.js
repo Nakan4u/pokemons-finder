@@ -1,7 +1,8 @@
 const firebaseUrl = 'https://pokemons-picker.firebaseio.com/favorite_pokemons.json',
+    api,
     apiBaseUrl = 'https://pokeapi.co/api/v2';
 
-var api = {
+api = {
     getInfo(pokemonName) {
         pokemonName = pokemonName.toLowerCase().trim();
         var url = `${apiBaseUrl}/pokemon/${pokemonName}`;

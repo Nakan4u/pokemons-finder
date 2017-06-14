@@ -47,9 +47,9 @@ export default class Dashboard extends Component {
                 })
         } else return;
     }
-    
+
     showNotification(msg, type = 'Success') {
-        alert( type, msg );
+        alert(type, msg);
     }
 
     toogleFavorites() {
@@ -132,7 +132,7 @@ export default class Dashboard extends Component {
                     this.props.history.push('/list/' + type.name);
                 }
             })
-            .catch(() => { 
+            .catch(() => {
                 this.setState({ isLoading: false });
             });
     }
