@@ -23,11 +23,11 @@ const stylesGenerel = StyleSheet.create(stylesGlobal);
 
 class MainPage extends MainClass {
 
-    render() {
-        var showErr = (
-            this.state.error ? <Text style={stylesGenerel['.error']}> {this.state.error} </Text> : <View></View>
-        ),
+    render () {
+        var showErr
+            = this.state.error ? <Text style={stylesGenerel['.error']}> {this.state.error} </Text> : <View></View>,
             disabled = !this.state.pokemonName;
+
         return (
             <View style={styles['.mainContainer']}>
                 <Text style={styles['.title']}>
@@ -53,21 +53,21 @@ class MainPage extends MainClass {
                     underlayColor="white">
                     <Text style={styles['.buttonText']}> Get pokemon list </Text>
                 </TouchableHighlight>
-                <ActivityIndicator animating={this.state.isLoading} size='large' color='white' />
+                <ActivityIndicator animating={this.state.isLoading} size="large" color="white" />
                 {showErr}
             </View>
         );
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     return {
         currentPokemonName: state.currentPokemonName
-    }
+    };
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage));
 

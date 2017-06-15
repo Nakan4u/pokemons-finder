@@ -23,10 +23,10 @@ const styles = StyleSheet.create(stylesGenerel);
 
 class Dashboard extends DashboardClass {
 
-    render() {
+    render () {
         return (
             <View style={styles['.container']}>
-                <Badge pokemon={this.state.pokemon} getPokemonsListByTypeHandler={this.getPokemonsListByType.bind(this)}></Badge>                
+                <Badge pokemon={this.state.pokemon} getPokemonsListByTypeHandler={this.getPokemonsListByType.bind(this)}></Badge>
                 <TouchableHighlight
                     style={styles['.button']}
                     onPress={this.toogleFavorites.bind(this)}
@@ -40,20 +40,20 @@ class Dashboard extends DashboardClass {
                     underlayColor="blue">
                     <Text style={styles['.buttonText']}> Go to favorites </Text>
                 </TouchableHighlight>
-                <ActivityIndicator animating={this.state.isLoading} size='large' />
+                <ActivityIndicator animating={this.state.isLoading} size="large" />
             </View>
         );
     }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentPokemonData: state.currentPokemonData
-  }
+function mapStateToProps (state) {
+    return {
+        currentPokemonData: state.currentPokemonData
+    };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ActionCreators, dispatch);
+function mapDispatchToProps (dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
 

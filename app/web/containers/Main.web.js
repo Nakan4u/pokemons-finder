@@ -11,17 +11,15 @@ require('./Main.css');
 
 class MainPageWeb extends MainPage {
 
-    handleChange(event) {
+    handleChange (event) {
         this.setState({
             pokemonName: event.nativeEvent.target.value,
             error: false
-        })
+        });
     }
 
-    render() {
-        var showErr = (
-            this.state.error ? <p className="error">{this.state.error} </p> : <p></p>
-        );
+    render () {
+        var showErr = this.state.error ? <p className="error">{this.state.error} </p> : <p></p>;
 
         return (
             <div className="mainContainer">
@@ -45,14 +43,14 @@ class MainPageWeb extends MainPage {
 }
 
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     return {
         currentPokemonName: state.currentPokemonName
-    }
+    };
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPageWeb));
 // export default withRouter(MainPageWeb);

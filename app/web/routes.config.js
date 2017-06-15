@@ -21,6 +21,6 @@ const routes = [
         path: '/list/:type',
         component: List
     }
-]
+];
 
 export default routes;

@@ -27,12 +27,12 @@ export default {
         margin: 5,
         borderWidth: 1,
         borderColor: '#48BBEC',
-        borderStyle: 'solid',
+        borderStyle: 'solid'
     },
     '.typeWrapper': {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'flex-start'
     }
-}
+};

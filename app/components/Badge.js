@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 export default class Badge extends Component {
-    makeBackground(type) {
-        var obj = {}
-        
+    makeBackground (type) {
+        var obj = {};
+
         switch (type) {
             case 'normal':
                 obj.backgroundColor = 'aliceblue';

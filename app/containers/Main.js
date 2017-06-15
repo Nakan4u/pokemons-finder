@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class MainPage extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             pokemonName: this.props.currentPokemonName,
@@ -10,15 +10,15 @@ export default class MainPage extends Component {
         };
     }
 
-    handleChange(event) {
+    handleChange (event) {
         this.setState({
             pokemonName: event.nativeEvent.text,
             error: false
-        })
+        });
     }
-    handleSubmit(event) {
+    handleSubmit (event) {
         if (event) event.preventDefault();
-        if (this.state.isLoading) return; //prevent multiply clicks
+        if (this.state.isLoading) return; // prevent multiply clicks
 
         if (this.state.pokemonName) {
             this.setState({ isLoading: true });
@@ -26,44 +26,43 @@ export default class MainPage extends Component {
 
             // fetch data from pokemon api
             this.props.getPokemon(this.state.pokemonName)
-                .then((res) => {
-                    if (res.detail === "Not found.") {
+                .then(res => {
+                    if (res.detail === 'Not found.')
                         this.setState({
                             error: 'Pokemon not found',
                             isLoading: false
-                        })
-                    } else {
+                        });
+                    else {
                         this.setState({
                             isLoading: false,
                             error: false
-                        })
+                        });
                         this.props.setPokemon(res);
                         this.props.history.push('/pokemon');
                     }
                 })
-                .catch((err) => {
+                .catch(err => {
                     console.error(err);
                     this.setState({ isLoading: false });
                 });
-        } else {
+        } else
             this.setState({ error: 'search field shouldn\'t be empty' });
-        }
     }
-    getList(event) {
+    getList (event) {
         if (event) event.preventDefault();
-        if (this.state.isLoading) return; //prevent multiply clicks
+        if (this.state.isLoading) return; // prevent multiply clicks
 
         this.setState({ isLoading: true });
         this.props.getPokemonsList()
-            .then((data) => {
+            .then(data => {
                 this.setState({
                     isLoading: false,
                     error: false
-                })
+                });
                 this.props.setPokemonsList(data);
                 this.props.history.push('/list');
             })
-            .catch((err) => {
+            .catch(err => {
                 console.error(err);
                 this.setState({ isLoading: false });
             });

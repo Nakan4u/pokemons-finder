@@ -7,7 +7,8 @@
         "jsx": true
     },
     "extends": [
-        "eslint:recommended",
+        "@eleks/eleks",
+        // "eslint:recommended",
         "plugin:react-native/all"
     ],
     "rules": {

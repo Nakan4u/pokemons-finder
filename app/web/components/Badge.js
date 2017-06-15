@@ -5,21 +5,21 @@ import { styles } from '../../native/components/Badge.css.js';
 require('./Badge.css');
 
 export default class BadgeWeb extends Badge {
-    render() {
+    render () {
         var pokemon = this.props.pokemon;
         var list = pokemon.types.map((item, index) => {
-            if (item.type.name) {
+            if (item.type.name)
                 return (
                     <a href="#" key={index} className="typeInner"
                         style={{backgroundColor:super.makeBackground(item.type.name).backgroundColor}}
                         onClick={this.props.getPokemonsListByTypeHandler.bind(this, item.type)}>
                         <span className="type">{item.type.name}</span>
                     </a>
-                )
-            } else {
-                return <span></span>
-            }
+                );
+
+            return <span></span>;
         });
+
         return (
             <div className="badge badgeContainer">
                 <h3 className="title"> {pokemon.name} </h3>

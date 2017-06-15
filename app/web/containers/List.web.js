@@ -11,15 +11,13 @@ require('./List.css');
 
 class ListWeb extends List {
 
-    render() {
-        var showErr = (
-            this.state.error ? <p className="error"> {this.state.error} </p> : <p></p>
-        ),
-            title = this.props.match.params.type ? this.props.match.params.type + ' pokemons list :' : 'Pokemons list :';
+    render () {
+        var showErr = this.state.error ? <p className="error"> {this.state.error} </p> : <p></p>,
+            title = this.props.match.params.type ? `${this.props.match.params.type} pokemons list :` : 'Pokemons list :';
 
         var listItems;
 
-        if (this.props.pokemonsListData.length) {
+        if (this.props.pokemonsListData.length)
             listItems = this.props.pokemonsListData.map((item, index) => {
                 var pokemon = item.pokemon ? item.pokemon : item;
 
@@ -28,9 +26,9 @@ class ListWeb extends List {
                         onClick={super.goToProfile.bind(this, pokemon.name)}>
                         {pokemon.name}
                     </a>
-                </li>
+                </li>;
             })
-        };
+        ;
 
         return (
             <div className="container">
@@ -45,13 +43,13 @@ class ListWeb extends List {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     return {
         pokemonsListData: state.pokemonsListData
-    }
+    };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 

@@ -9,14 +9,14 @@ import {
 import stylesLocal from './Header.css.js';
 const styles = StyleSheet.create(stylesLocal);
 
-export default class Header extends React.Component{
-  render(){
-    return (
-      <View style={styles['.header']}>
-        <Link to="/">
-            <Text style={styles['.navItem']}>Go to Home</Text>
-        </Link>
-      </View>
-    );
-  }
-};
+export default class Header extends React.Component {
+    render () {
+        return (
+            <View style={styles['.header']}>
+                <Link to="/">
+                    <Text style={styles['.navItem']}>Go to Home</Text>
+                </Link>
+            </View>
+        );
+    }
+}

@@ -14,20 +14,20 @@ const styles = StyleSheet.create(stylesGlobal);
 
 class AppContainer extends React.Component {
 
-  render() {
-    return (
-      <View style={styles['.appContainer']}>
-        <Header />
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
-      </View>
-    );
-  }
+    render () {
+        return (
+            <View style={styles['.appContainer']}>
+                <Header />
+                {routes.map((route, i) =>
+                    <RouteWithSubRoutes key={i} {...route} />
+                )}
+            </View>
+        );
+    }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ActionCreators, dispatch);
+function mapDispatchToProps (dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect((state) => { return {} }, mapDispatchToProps)(AppContainer);
+export default connect(state => ({}), mapDispatchToProps)(AppContainer);

@@ -16,7 +16,7 @@ export default {
     '.instructions': {
         textAlign: 'center',
         color: '#fff',
-        marginBottom: 5,
+        marginBottom: 5
     },
     '.searchInput': {
         height: 50,
@@ -46,4 +46,4 @@ export default {
         alignSelf: 'stretch',
         justifyContent: 'center'
     }
-}
+};

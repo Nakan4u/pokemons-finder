@@ -25,20 +25,20 @@ const styles = StyleSheet.create(stylesLocal);
 const stylesGenerel = StyleSheet.create(stylesGlobal);
 
 class List extends ListClass {
-    constructor(props) {
+    constructor (props) {
         super(props);
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
         this.state = {
             dataSource: ds.cloneWithRows(this.props.pokemonsListData),
-            isLoading: false,
+            isLoading: false
         };
     }
 
-    render() {
-        var showErr = (
-            this.state.error ? <Text style={stylesGenerel['.error']}> {this.state.error} </Text> : <View></View>
-        ),
-            title = this.props.match.params.type ? this.props.match.params.type + ' pokemons list :' : 'Pokemons list :';
+    render () {
+        var showErr
+            = this.state.error ? <Text style={stylesGenerel['.error']}> {this.state.error} </Text> : <View></View>,
+            title = this.props.match.params.type ? `${this.props.match.params.type} pokemons list :` : 'Pokemons list :';
 
         return (
             <View style={stylesGenerel['.container']}>
@@ -48,8 +48,9 @@ class List extends ListClass {
                     dataSource={this.state.dataSource}
                     renderRow={(item, sectionID, rowID) => {
                         var pokemon = item.pokemon ? item.pokemon : item;
-                        rowID++; //increase index to begin from 1;
-                        
+
+                        rowID++; // increase index to begin from 1;
+
                         return <View key={rowID} style={styles['.rowContainer']}>
                             <TouchableHighlight
                                 onPress={this.goToProfile.bind(this, pokemon.name)}
@@ -57,22 +58,22 @@ class List extends ListClass {
                                 <Text style={styles['.rowTitle']}> {rowID}. {pokemon.name} </Text>
                             </TouchableHighlight>
                             <Separator></Separator>
-                        </View>
+                        </View>;
                     }} />
-                <ActivityIndicator animating={this.state.isLoading} size='large' />
+                <ActivityIndicator animating={this.state.isLoading} size="large" />
             </View>
         );
     }
 }
 
-function mapStateToProps(state) {
-  return {
-    pokemonsListData: state.pokemonsListData
-  }
+function mapStateToProps (state) {
+    return {
+        pokemonsListData: state.pokemonsListData
+    };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ActionCreators, dispatch);
+function mapDispatchToProps (dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List));

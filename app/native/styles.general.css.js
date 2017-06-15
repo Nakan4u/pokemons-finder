@@ -2,7 +2,7 @@
 export default {
     '.appContainer': {
         flex: 1,
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F5FCFF'
     },
     '.container': {
         padding: 25,
@@ -36,4 +36,4 @@ export default {
         color: 'red',
         textAlign: 'center'
     }
-}
+};

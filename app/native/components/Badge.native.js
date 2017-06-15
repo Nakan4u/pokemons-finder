@@ -16,10 +16,10 @@ const stylesGenerel = StyleSheet.create(stylesGlobal);
 
 export default class Badge extends BadgeClass {
 
-    render() {
+    render () {
         var pokemon = this.props.pokemon;
         var list = pokemon.types.map((item, index) => {
-            if (item.type.name) {
+            if (item.type.name)
                 return (
                     <View key={index} style={styles['.typeInner']}>
                         <TouchableHighlight
@@ -28,11 +28,11 @@ export default class Badge extends BadgeClass {
                             <Text style={styles['.type']}> {item.type.name} </Text>
                         </TouchableHighlight>
                     </View>
-                )
-            } else {
-                return <View key={index} />
-            }
+                );
+
+            return <View key={index} />;
         });
+
         return (
             <View style={styles['.badgeContainer']}>
                 <Text style={stylesGenerel['.title']}> {pokemon.name} </Text>

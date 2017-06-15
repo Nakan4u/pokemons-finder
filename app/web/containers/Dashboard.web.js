@@ -12,7 +12,7 @@ require('./Dashboard.css');
 
 class DashboardWeb extends Dashboard {
 
-    render() {
+    render () {
         return (
             <div className="dashboard container">
                 <Badge pokemon={this.state.pokemon} getPokemonsListByTypeHandler={super.getPokemonsListByType.bind(this)}></Badge>
@@ -35,13 +35,13 @@ class DashboardWeb extends Dashboard {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     return {
         currentPokemonData: state.currentPokemonData
-    }
+    };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
 }
 

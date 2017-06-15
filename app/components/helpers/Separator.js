@@ -5,17 +5,16 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-  separator: {
-    height: 1,
-    backgroundColor: '#E4E4E4',
-    // flex: 1
-  },
+    separator: {
+        height: 1,
+        backgroundColor: '#E4E4E4'
+    }
 });
 
-export default class Separator extends React.Component{
-  render(){
-    return (
-      <View style={styles.separator} />
-    );
-  }
-};
+export default class Separator extends React.Component {
+    render () {
+        return (
+            <View style={styles.separator} />
+        );
+    }
+}

@@ -10,11 +10,11 @@ export default {
     '.listInner': {
         flex: 1,
         justifyContent: 'flex-start',
-        padding: 10,
+        padding: 10
     },
     '.rowTitle': {
         color: '#48BBEC',
         fontSize: 20,
         padding: 5
     }
-}
+};

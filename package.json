@@ -29,9 +29,10 @@
     "webpack": "^2.4.1"
   },
   "devDependencies": {
+    "@eleks/eslint-config-eleks": "^0.2.1",
     "css-js-loader": "^0.4.0",
     "css-loader": "^0.28.2",
-    "eslint": "^3.4.0",
+    "eslint": "^3.19.0",
     "eslint-config-recommended": "^1.5.0",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-react-native": "^2.2.1",

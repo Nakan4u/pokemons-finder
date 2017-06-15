@@ -12,4 +12,4 @@ export default {
         alignItems: 'center',
         padding: 10
     }
-}
+};
