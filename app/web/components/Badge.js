@@ -6,13 +6,14 @@ require('./Badge.css');
 
 export default class BadgeWeb extends Badge {
     render () {
-        var pokemon = this.props.pokemon;
+        const {pokemon, getPokemonsListByTypeHandler} = this.props;
+
         var list = pokemon.types.map((item, index) => {
             if (item.type.name)
                 return (
                     <a href="#" key={index} className="typeInner"
                         style={{backgroundColor:super.makeBackground(item.type.name).backgroundColor}}
-                        onClick={this.props.getPokemonsListByTypeHandler.bind(this, item.type)}>
+                        onClick={getPokemonsListByTypeHandler.bind(this, item.type)}>
                         <span className="type">{item.type.name}</span>
                     </a>
                 );

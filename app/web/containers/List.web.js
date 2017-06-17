@@ -12,13 +12,15 @@ require('./List.css');
 class ListWeb extends List {
 
     render () {
+        const {match, pokemonsListData} = this.props;
+
         var showErr = this.state.error ? <p className="error"> {this.state.error} </p> : <p></p>,
-            title = this.props.match.params.type ? `${this.props.match.params.type} pokemons list :` : 'Pokemons list :';
+            title = match.params.type ? `${match.params.type} pokemons list :` : 'Pokemons list :';
 
         var listItems;
 
-        if (this.props.pokemonsListData.length)
-            listItems = this.props.pokemonsListData.map((item, index) => {
+        if (pokemonsListData.length)
+            listItems = pokemonsListData.map((item, index) => {
                 var pokemon = item.pokemon ? item.pokemon : item;
 
                 return <li className="rowContainer" key={index}>

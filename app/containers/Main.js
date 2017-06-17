@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 export default class MainPage extends Component {
     constructor (props) {
         super(props);
+        const {currentPokemonName} = this.props;
+
         this.state = {
-            pokemonName: this.props.currentPokemonName,
+            pokemonName: currentPokemonName,
             isLoading: false,
             error: false
         };
@@ -17,15 +19,17 @@ export default class MainPage extends Component {
         });
     }
     handleSubmit (event) {
+        const {setCurrentPokemonName, getPokemon, setPokemon, history} = this.props;
+
         if (event) event.preventDefault();
         if (this.state.isLoading) return; // prevent multiply clicks
 
         if (this.state.pokemonName) {
             this.setState({ isLoading: true });
-            this.props.setCurrentPokemonName(this.state.pokemonName);
+            setCurrentPokemonName(this.state.pokemonName);
 
             // fetch data from pokemon api
-            this.props.getPokemon(this.state.pokemonName)
+            getPokemon(this.state.pokemonName)
                 .then(res => {
                     if (res.detail === 'Not found.')
                         this.setState({
@@ -37,8 +41,8 @@ export default class MainPage extends Component {
                             isLoading: false,
                             error: false
                         });
-                        this.props.setPokemon(res);
-                        this.props.history.push('/pokemon');
+                        setPokemon(res);
+                        history.push('/pokemon');
                     }
                 })
                 .catch(err => {
@@ -49,18 +53,20 @@ export default class MainPage extends Component {
             this.setState({ error: 'search field shouldn\'t be empty' });
     }
     getList (event) {
+        const {getPokemonsList, setPokemonsList, history} = this.props;
+
         if (event) event.preventDefault();
         if (this.state.isLoading) return; // prevent multiply clicks
 
         this.setState({ isLoading: true });
-        this.props.getPokemonsList()
+        getPokemonsList()
             .then(data => {
                 this.setState({
                     isLoading: false,
                     error: false
                 });
-                this.props.setPokemonsList(data);
-                this.props.history.push('/list');
+                setPokemonsList(data);
+                history.push('/list');
             })
             .catch(err => {
                 console.error(err);

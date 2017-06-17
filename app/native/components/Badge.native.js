@@ -17,14 +17,15 @@ const stylesGenerel = StyleSheet.create(stylesGlobal);
 export default class Badge extends BadgeClass {
 
     render () {
-        var pokemon = this.props.pokemon;
+        const {pokemon, getPokemonsListByTypeHandler} = this.props;
+
         var list = pokemon.types.map((item, index) => {
             if (item.type.name)
                 return (
                     <View key={index} style={styles['.typeInner']}>
                         <TouchableHighlight
                             style={this.makeBackground(item.type.name)}
-                            onPress={this.props.getPokemonsListByTypeHandler.bind(this, item.type)}>
+                            onPress={getPokemonsListByTypeHandler.bind(this, item.type)}>
                             <Text style={styles['.type']}> {item.type.name} </Text>
                         </TouchableHighlight>
                     </View>

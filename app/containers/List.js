@@ -9,10 +9,12 @@ export default class List extends Component {
         };
     }
     goToProfile (pokemonName) {
+        const {getPokemon, setPokemon, history} = this.props;
+
         if (this.state.isLoading) return; // prevent multiply clicks
 
         this.setState({isLoading: true});
-        this.props.getPokemon(pokemonName)
+        getPokemon(pokemonName)
             .then(res => {
                 if (res.detail === 'Not found.')
                     this.setState({
@@ -24,8 +26,8 @@ export default class List extends Component {
                         isLoading: false,
                         error: false
                     });
-                    this.props.setPokemon(res);
-                    this.props.history.push('/pokemon');
+                    setPokemon(res);
+                    history.push('/pokemon');
                 }
             })
             .catch(err => {

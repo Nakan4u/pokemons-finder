@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 export default class Dashboard extends Component {
     constructor (props) {
         super(props);
+        const { currentPokemonData, isFavorite} = this.props;
+
         this.state = {
-            pokemon: this.props.currentPokemonData,
-            isFavorite: this.props.isFavorite || false,
-            storageId: undefined,
+            pokemon: currentPokemonData,
+            isFavorite: isFavorite || false,
+            storageId: null,
             isLoading: false,
             error: false
         };
@@ -76,17 +78,18 @@ export default class Dashboard extends Component {
     }
 
     goToFavorites () {
+        const {getFavoritePokemons, setPokemonsList, history} = this.props;
         var convertedData;
 
         if (this.state.isLoading) return; // prevent multiply clicks
         this.setState({ isLoading: true });
 
-        this.props.getFavoritePokemons()
+        getFavoritePokemons()
             .then(res => {
                 convertedData = this._convertData(res); // conver data to be the same as pokemon API list response;
                 this.setState({ isLoading: false });
-                this.props.setPokemonsList(convertedData);
-                this.props.history.push('/list/favorites');
+                setPokemonsList(convertedData);
+                history.push('/list/favorites');
             })
             .catch(() => {
                 this.setState({ isLoading: false, error: 'error with getting favorites pokemos API' });
@@ -117,9 +120,11 @@ export default class Dashboard extends Component {
     }
 
     getPokemonsListByType (type) {
+        const {getPokemonsListBytype, setPokemonsList, history} = this.props;
+
         this.setState({ isLoading: true });
         // fetch data from pokemon api
-        this.props.getPokemonsListBytype(type.url)
+        getPokemonsListBytype(type.url)
             .then(res => {
                 this.setState({ isLoading: false });
                 if (res.detail === 'Not found.')
@@ -131,8 +136,8 @@ export default class Dashboard extends Component {
                         error: false,
                         pokemonName: ''
                     });
-                    this.props.setPokemonsList(res.pokemon);
-                    this.props.history.push(`/list/${type.name}`);
+                    setPokemonsList(res.pokemon);
+                    history.push(`/list/${type.name}`);
                 }
             })
             .catch(() => {
