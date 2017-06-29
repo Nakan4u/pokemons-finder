@@ -9,6 +9,11 @@ const routes = [
         component: Main
     },
     {
+        path: '/pokemons-finder/',
+        exact: true,
+        component: Main
+    },
+    {
         path: '/pokemon',
         component: Dashboard
     },
